@@ -78,6 +78,26 @@ xmlns="http://www.w3.org/1999/xhtml">
       </xsl:for-each>
 
       <div id="impress">
+        <xsl:if test="@data-width">
+          <xsl:attribute name="data-width">
+            <xsl:value-of select="@data-width" />
+          </xsl:attribute>
+        </xsl:if>
+        <xsl:if test="@data-height">
+          <xsl:attribute name="data-height">
+            <xsl:value-of select="@data-height" />
+          </xsl:attribute>
+        </xsl:if>
+        <xsl:if test="@data-max-scale">
+          <xsl:attribute name="data-max-scale">
+            <xsl:value-of select="@data-max-scale" />
+          </xsl:attribute>
+        </xsl:if>
+        <xsl:if test="@data-min-scale">
+          <xsl:attribute name="data-min-scale">
+            <xsl:value-of select="@data-min-scale" />
+          </xsl:attribute>
+        </xsl:if>
         <xsl:if test="@data-perspective">
           <xsl:attribute name="data-perspective">
             <xsl:value-of select="@data-perspective" />

@@ -15,8 +15,13 @@
     display: none;
 }
 
-.step {
-    width: 800px;
+.substep {
+    opacity: 0;
+}
+
+.substep.substep-visible {
+    opacity: 1;
+    transition: opacity 1s;
 }
 
 
@@ -42,6 +47,12 @@
 #impress-help strong {
     font-family: inherit;
     font-size: 98%;
+}
+
+/* Small hack to prevent the help from showing in previews */
+.impress-console #impress-help {
+    opacity: 0;
+    background-color: green;
 }
 
 /* Slide numbers */
