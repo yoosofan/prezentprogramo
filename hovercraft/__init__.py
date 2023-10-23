@@ -12,7 +12,7 @@ from watchdog.events import FileSystemEventHandler
 
 from .generate import generate
 
-__version__ = pkg_resources.require("hovercraft")[0].version
+__version__ = pkg_resources.require("prezenta")[0].version
 
 
 class HovercraftEventHandler(FileSystemEventHandler):
@@ -95,7 +95,7 @@ def create_arg_parser():
         help=(
             "The directory where the presentation is saved. Will be created "
             "if it does not exist. If you do not specify a targetdir "
-            "Hovercraft! will instead start a webserver and serve the "
+            "prezenta will instead start a webserver and serve the "
             "presentation from that server."
         ),
     )

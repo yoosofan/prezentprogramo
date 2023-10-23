@@ -1,5 +1,6 @@
 Contributors
 ------------
+Prezenta was written by Ahmad Yoosofan <yoosofan@gmx.com>, and is licensed with GPLv3.
 
 Hovercraft! was written by Lennart Regebro <regebro@gmail.com>, and is licensed
 with an MIT license, except for the following:

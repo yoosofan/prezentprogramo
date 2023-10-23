@@ -1,13 +1,14 @@
-Hovercraft!
-===========
+Prezenta Aplikaĵo
+=================
 *The merge of convenience and cool!*
 
-Hovercraft! is a tool to make impress.js_ presentations from
+Prezenta is a tool to make impress.js_ presentations from
 reStructuredText. For a quick explanation, see the demo_.
+
+Based on `Hovercraft! <https://github.com/regebro/hovercraft>`_
 
 Features
 --------
-
 * Write your presentations in a text markup language. No slow, limiting GUI, no annoying HTML!
 
 * Pan, rotate and zoom in 3D, with automatic repositioning of slides!
@@ -22,16 +23,29 @@ Features
 
 * Easy sharing, as it can be put up on a website for anyone to see!
 
-Full documentation is available at readthedocs.org_, and also in the
+Full documentation of Hovercraft is available at readthedocs.org_, and also in the
 documentation subdirectory.
 
 Installation
 ------------
-Hovercraft requires Python 3 and can be installed like any Python package.
+Prezenta requires Python 3 and can be installed like any Python package.
 
+It is better to use virtual environment::
+
+    $ cd /destination/directory/
+    $ python -m venv myvenv
+    $ source myvenv/bin/activate
+
+Download the code in a directory let's name it `src_dir/path/`
 The easiest way is to install pip_, and then run::
 
-    $ pip3 install hovercraft
+    $ python3 -m pip install /home/ahmad/research/projects/prezenta/
+
+Use prezenta
+
+Then you can deactivate virtual environment::
+
+    $ deactivate
 
 Juan Bondi has made videos of how to install:
 
