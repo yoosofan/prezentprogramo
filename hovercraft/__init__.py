@@ -174,6 +174,11 @@ def create_arg_parser():
         help=("Show slide numbers during the presentation."),
     )
     parser.add_argument(
+        "-d",
+        "--default-movement",
+        help=("The default value of moving to the right in pixel during presentation execution."),
+    )
+    parser.add_argument(
         "-v",
         "--version",
         action="version",

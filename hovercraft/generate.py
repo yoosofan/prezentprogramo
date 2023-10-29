@@ -32,6 +32,7 @@ def rst2html(
     skip_notes=False,
     mathjax=False,
     slide_numbers=False,
+    default_movement=False,
 ):
     # Read the infile
     with open(filepath, "rb") as infile:
@@ -107,7 +108,7 @@ def rst2html(
             )
 
     # Position all slides
-    position_slides(tree)
+    position_slides(tree, default_movement)
 
     # Add the template info to the tree:
     tree.append(template_info.xml_node())
@@ -190,6 +191,7 @@ def generate(args):
         args.skip_notes,
         args.mathjax,
         args.slide_numbers,
+        args.default_movement,
     )
     source_files.update(dependencies)
 

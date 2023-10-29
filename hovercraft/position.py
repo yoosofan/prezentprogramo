@@ -14,7 +14,7 @@ POSITION_ATTRIBS = [
 ]
 
 
-def gather_positions(tree):
+def gather_positions(tree, default_movement_from_args):
     """Makes a list of positions and position commands from the tree"""
     pos = {
         "data-x": "r0",
@@ -51,8 +51,12 @@ def gather_positions(tree):
             pos["data-scale"] = "1"
 
         if default_movement and steps != 1:
-            # No positioning has been given, use default:
-            pos["data-x"] = "r%s" % DEFAULT_MOVEMENT
+            # No positioning has been given, use args:
+            if default_movement_from_args:
+                pos["data-x"] = "r%s" % int(default_movement_from_args)
+            else:
+                # No positioning has been given, use default:
+                pos["data-x"] = "r%s" % DEFAULT_MOVEMENT
 
         if "data-rotate" in step.attrib:
             # data-rotate is an alias for data-rotate-z
@@ -247,9 +251,9 @@ def update_positions(tree, positions):
             del step.attrib["hovercraft-path"]
 
 
-def position_slides(tree):
+def position_slides(tree, default_movement):
     """Position the slides in the tree"""
 
-    positions = gather_positions(tree)
+    positions = gather_positions(tree, default_movement)
     positions = calculate_positions(positions)
     update_positions(tree, positions)
