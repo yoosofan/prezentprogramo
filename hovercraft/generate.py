@@ -32,7 +32,7 @@ def rst2html(
     skip_notes=False,
     mathjax=False,
     slide_numbers=False,
-    default_movement=False,
+    default_movement_from_args=False,
 ):
     # Read the infile
     with open(filepath, "rb") as infile:
@@ -48,12 +48,12 @@ def rst2html(
     sm = SlideMaker(tree, skip_notes=skip_notes)
     tree = sm.walk()
 
+    default_movement_from_data_width = None
     # Pick up CSS information from the tree:
-    for attrib in tree.attrib:
+    for attrib, value in tree.attrib.items():
 
-        # if attrib.startwith('data-width'):
-
-        # Do something
+        if attrib.startswith('data-width'):
+            default_movement_from_data_width = value
 
         if attrib.startswith("css"):
 
@@ -115,7 +115,7 @@ def rst2html(
             )
 
     # Position all slides
-    position_slides(tree, default_movement)
+    position_slides(tree, default_movement_from_args, default_movement_from_data_width)
 
     # Add the template info to the tree:
     tree.append(template_info.xml_node())
