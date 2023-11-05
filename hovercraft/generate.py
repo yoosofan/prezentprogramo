@@ -32,6 +32,7 @@ def rst2html(
     skip_notes=False,
     mathjax=False,
     slide_numbers=False,
+    default_movement_from_args=False,
 ):
     # Read the infile
     with open(filepath, "rb") as infile:
@@ -47,8 +48,13 @@ def rst2html(
     sm = SlideMaker(tree, skip_notes=skip_notes)
     tree = sm.walk()
 
+    default_movement_from_data_width = None
     # Pick up CSS information from the tree:
-    for attrib in tree.attrib:
+    for attrib, value in tree.attrib.items():
+
+        if attrib.startswith('data-width'):
+            default_movement_from_data_width = value
+
         if attrib.startswith("css"):
 
             if "-" in attrib:
@@ -57,6 +63,7 @@ def rst2html(
                 media = "screen,projection"
             css_files = tree.attrib[attrib].split()
             for css_file in css_files:
+                target = f'css/{css_file.split("/")[-1]}'
                 if media in ("console", "preview"):
                     # The "console" media is used to style the presenter
                     # console and does not need to be included in the header,
@@ -65,14 +72,14 @@ def rst2html(
                     template_info.add_resource(
                         os.path.abspath(os.path.join(presentation_dir, css_file)),
                         OTHER_RESOURCE,
-                        target=css_file,
+                        target=target,
                     )
                 else:
                     # Add as a css resource:
                     template_info.add_resource(
                         os.path.abspath(os.path.join(presentation_dir, css_file)),
                         CSS_RESOURCE,
-                        target=css_file,
+                        target=target,
                         extra_info=media,
                     )
 
@@ -84,10 +91,11 @@ def rst2html(
                 media = JS_POSITION_BODY
             js_files = tree.attrib[attrib].split()
             for js_file in js_files:
+                target = f'js/{js_file.split("/")[-1]}'
                 template_info.add_resource(
                     os.path.abspath(os.path.join(presentation_dir, js_file)),
                     JS_RESOURCE,
-                    target=js_file,
+                    target=target,
                     extra_info=media,
                 )
 
@@ -107,7 +115,7 @@ def rst2html(
             )
 
     # Position all slides
-    position_slides(tree)
+    position_slides(tree, default_movement_from_args, default_movement_from_data_width)
 
     # Add the template info to the tree:
     tree.append(template_info.xml_node())
@@ -138,12 +146,14 @@ def rst2html(
     return template_info.doctype + result, dependencies
 
 
-def copy_resource(filename, sourcedir, targetdir):
+def copy_resource(filename, sourcedir, targetdir, sourcepath=None, targetpath=None):
     if filename[0] == "/" or ":" in filename:
         # Absolute path or URI: Do nothing
         return None  # No monitoring needed
-    sourcepath = os.path.join(sourcedir, filename)
-    targetpath = os.path.join(targetdir, filename)
+    if sourcepath is None:
+        sourcepath = os.path.join(sourcedir, filename)
+    if targetpath is None:
+        targetpath = os.path.join(targetdir, filename)
 
     if os.path.exists(targetpath) and os.path.getmtime(sourcepath) <= os.path.getmtime(
         targetpath
@@ -190,14 +200,13 @@ def generate(args):
         args.skip_notes,
         args.mathjax,
         args.slide_numbers,
+        args.default_movement,
     )
     source_files.update(dependencies)
 
-    # Write the HTML out
+    # Create targetdir directory
     if not os.path.exists(args.targetdir):
         os.makedirs(args.targetdir)
-    with open(os.path.join(args.targetdir, "index.html"), "wb") as outfile:
-        outfile.write(htmldata)
 
     # Copy supporting files
     source_files.update(template_info.copy_resources(args.targetdir))
@@ -205,9 +214,22 @@ def generate(args):
     # Copy files from the source:
     sourcedir = os.path.split(os.path.abspath(args.presentation))[0]
     tree = html.fromstring(htmldata)
+
+    # Copy images to targetdir/img directory and update html tree
     for image in tree.iterdescendants("img"):
-        filename = image.attrib["src"]
-        source_files.add(copy_resource(filename, sourcedir, args.targetdir))
+        img_src = image.attrib["src"]
+        filename = img_src.split("/")[-1]
+        targetpath = os.path.join(args.targetdir, f"img/{filename}")
+        source_files.add(
+            copy_resource(
+                img_src,
+                sourcedir,
+                args.targetdir,
+                sourcepath=None,
+                targetpath=targetpath))
+        image.attrib["src"] = f"img/{filename}"
+
+
     for source in tree.iterdescendants("source"):
         filename = source.attrib["src"]
         source_files.add(copy_resource(filename, sourcedir, args.targetdir))
@@ -234,6 +256,11 @@ def generate(args):
         else:
             for filename in uris:
                 source_files.add(copy_resource(filename, css_sourcedir, css_targetdir))
+
+    # Write the HTML out
+    htmldata = html.tostring(tree)
+    with open(os.path.join(args.targetdir, "index.html"), "wb") as outfile:
+        outfile.write(htmldata)
 
     # All done!
 
