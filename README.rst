@@ -39,6 +39,8 @@ Juan Bondi has made videos of how to install:
 
 * Installation on Windows: https://www.youtube.com/watch?v=I63I8Az24d8
 
+Chromium-chromedriver is needed to generate PDF from RST presentations files (You can only Install Chrome Browser)
+
 Hovercraft is untested on Windows, but there is no reason it shouldn't work, at least in theory.
 
 
