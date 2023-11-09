@@ -258,6 +258,10 @@ def prepare_for_pdf(html_file_path):
                 height: 100%;
                 page-break-after: always;
             }
+            .substep
+            {
+                opacity: 1 !important;
+            }
         </style>'''
     )
 
