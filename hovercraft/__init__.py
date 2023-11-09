@@ -10,7 +10,7 @@ from tempfile import TemporaryDirectory
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
-from .generate import generate
+from .generate import generate, generate_pdf
 
 __version__ = pkg_resources.require("hovercraft")[0].version
 
@@ -68,7 +68,11 @@ def generate_and_observe(args, event):
 def main(args=None):
     parser = create_arg_parser()
     args = parser.parse_args(args=args)
-    serve_presentation(args)
+
+    if args.pdf_output_path:  # Check if the -pdf switch is provided
+        generate_pdf(args)
+    else:
+        serve_presentation(args)
 
 
 def create_arg_parser():
@@ -180,6 +184,13 @@ def create_arg_parser():
         # help=('Display version and exit.'),
         version="Hovercraft! %s" % __version__,
     )
+    parser.add_argument(
+        "-pdf",
+        "--pdf",
+        help="Path to the output PDF file",
+        action="store",
+        dest="pdf_output_path",
+    )  # -pdf switch
 
     return parser
 
