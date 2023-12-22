@@ -23,7 +23,7 @@ xmlns="http://www.w3.org/1999/xhtml">
     <title><xsl:value-of select="/document/@title"/></title>
 
     <meta charset="UTF-8"/>
-    <meta name="generator" content="Hovercraft! 1.0 http://regebro.github.io/hovercraft"/>
+    <meta name="generator" content="prezenta 1.0 https://github.com/yoosofan/prezenta"/>
     <xsl:if test="/document/author"> <!-- Author is a child to the document, everything else become attributes -->
       <meta name="author">
         <xsl:attribute name="content">
@@ -65,6 +65,16 @@ xmlns="http://www.w3.org/1999/xhtml">
         <xsl:copy-of select="@*"/>
       </script>
     </xsl:for-each>
+
+    <xsl:if test="/document/@data-width">
+      <style type="text/css">
+        .step {
+          width: <xsl:value-of select="/document/@data-width"/>px;
+        }
+      </style>
+    </xsl:if>
+
+
   </head>
   <body class="impress-not-supported">
     <xsl:if test="not(/document/@skip-help)">
@@ -78,6 +88,26 @@ xmlns="http://www.w3.org/1999/xhtml">
       </xsl:for-each>
 
       <div id="impress">
+        <xsl:if test="@data-width">
+          <xsl:attribute name="data-width">
+            <xsl:value-of select="@data-width" />
+          </xsl:attribute>
+        </xsl:if>
+        <xsl:if test="@data-height">
+          <xsl:attribute name="data-height">
+            <xsl:value-of select="@data-height" />
+          </xsl:attribute>
+        </xsl:if>
+        <xsl:if test="@data-max-scale">
+          <xsl:attribute name="data-max-scale">
+            <xsl:value-of select="@data-max-scale" />
+          </xsl:attribute>
+        </xsl:if>
+        <xsl:if test="@data-min-scale">
+          <xsl:attribute name="data-min-scale">
+            <xsl:value-of select="@data-min-scale" />
+          </xsl:attribute>
+        </xsl:if>
         <xsl:if test="@data-perspective">
           <xsl:attribute name="data-perspective">
             <xsl:value-of select="@data-perspective" />

@@ -12,7 +12,7 @@ from watchdog.events import FileSystemEventHandler
 
 from .generate import generate, generate_pdf
 
-__version__ = pkg_resources.require("hovercraft")[0].version
+__version__ = pkg_resources.require("prezenta")[0].version
 
 
 class HovercraftEventHandler(FileSystemEventHandler):
@@ -99,7 +99,7 @@ def create_arg_parser():
         help=(
             "The directory where the presentation is saved. Will be created "
             "if it does not exist. If you do not specify a targetdir "
-            "Hovercraft! will instead start a webserver and serve the "
+            "prezenta will instead start a webserver and serve the "
             "presentation from that server."
         ),
     )
@@ -176,6 +176,11 @@ def create_arg_parser():
         "--slide-numbers",
         action="store_true",
         help=("Show slide numbers during the presentation."),
+    )
+    parser.add_argument(
+        "-d",
+        "--default-movement",
+        help=("The default value of moving to the right in pixel during presentation execution."),
     )
     parser.add_argument(
         "-v",

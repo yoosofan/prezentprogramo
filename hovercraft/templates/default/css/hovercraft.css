@@ -15,10 +15,6 @@
     display: none;
 }
 
-.step {
-    width: 800px;
-}
-
 .substep {
     opacity: 0;
 }

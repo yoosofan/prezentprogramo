@@ -1,4 +1,4 @@
-// Main hovercraft js file
+// Main prezenta js file
 ( function( document ) {
     "use strict";
 

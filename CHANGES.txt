@@ -1,6 +1,13 @@
 Changes
 =======
+1.0 (2023/10/23)
+----------------
+- Update impress.js to newer version by
+- Update xsl to support data-with
+- Rename the application and test by Ahmad Yoosofan
 
+Hovercraft Changes
+==================
 2.8 (unreleased)
 ----------------
 
