@@ -3,7 +3,8 @@ import re
 import shutil
 from lxml import etree, html
 from pkg_resources import resource_string
-
+from lxml import html
+from pyhtml2pdf import converter
 from .parse import rst2xml, SlideMaker
 from .position import position_slides
 from .template import (
@@ -60,7 +61,7 @@ def rst2html(
             if "-" in attrib:
                 dummy, media = attrib.split("-", 1)
             else:
-                media = "screen,projection"
+                media = "all"
             css_files = tree.attrib[attrib].split()
             for css_file in css_files:
                 target = f'css/{css_file.split("/")[-1]}'
@@ -233,6 +234,23 @@ def generate(args):
     for source in tree.iterdescendants("source"):
         filename = source.attrib["src"]
         source_files.add(copy_resource(filename, sourcedir, args.targetdir))
+        
+    # Code for handling iframe sources
+    for iframe in tree.iterdescendants("iframe"):
+        iframe_src = iframe.attrib.get("src")
+        if iframe_src:
+            filename = iframe_src.split("/")[-1]
+            targetpath = os.path.join(args.targetdir, f"iframe/{filename}")
+            source_files.add(
+                copy_resource(
+                    iframe_src,
+                    sourcedir,
+                    args.targetdir,
+                    sourcepath=None,
+                    targetpath=targetpath
+                )
+            )
+            iframe.attrib["src"] = f"iframe/{filename}"
 
     RE_CSS_URL = re.compile(rb"""url\(['"]?(.*?)['"]?[\)\?\#]""")
 
@@ -263,5 +281,163 @@ def generate(args):
         outfile.write(htmldata)
 
     # All done!
+
+    return {os.path.abspath(f) for f in source_files if f}
+
+def prepare_for_pdf(html_file_path):
+    # Read the HTML content from the file
+    with open(html_file_path, "r") as html_file:
+        html_content = html_file.read()
+        
+        html_content = html_content.replace(
+        '<head>',
+        '''<head>
+        <style>
+            .pdfContainer
+            {
+                justify-content: center;
+                align-items: center; 
+                display: flex;
+                width: 100%;
+                height: 100%;
+                page-break-after: always;
+            }
+            .substep
+            {
+                opacity: 1 !important;
+            }
+        </style>'''
+    )
+
+    # Find and delete the specific div
+    tree = html.fromstring(html_content)
+    divs_to_delete = tree.xpath('//div[@id="impress"]')
+    for div_to_delete in divs_to_delete:
+        parent = div_to_delete.getparent()
+        for element in div_to_delete.iterchildren():
+            parent.insert(parent.index(div_to_delete), element)
+        parent.remove(div_to_delete)
+
+    # Add a new div around each div with class "step"
+    step_divs = tree.xpath('//div[contains(@class, "step")]')
+    for step_div in step_divs:
+        container_div = html.Element("div")
+        container_div.set("class", "pdfContainer")
+        step_div.addprevious(container_div)
+        container_div.append(step_div)
+
+    # Convert the modified tree back to HTML
+    html_content = html.tostring(tree, encoding="unicode")
+
+    # Write the modified HTML back to the file
+    with open(html_file_path, "w") as html_file:
+        html_file.write(html_content)
+
+
+
+def generate_pdf(args):
+    """Generates the pdf and returns a list of files used"""
+
+    source_files = {args.presentation}
+    # Parse the template info
+    template_info = Template(args.template)
+    if args.css:
+        presentation_dir = os.path.split(args.presentation)[0]
+        target_path = os.path.relpath(args.css, presentation_dir)
+        template_info.add_resource(
+            args.css, CSS_RESOURCE, target=target_path, extra_info="all"
+        )
+        source_files.add(args.css)
+    if args.js:
+        presentation_dir = os.path.split(args.presentation)[0]
+        target_path = os.path.relpath(args.js, presentation_dir)
+        template_info.add_resource(
+            args.js, JS_RESOURCE, target=target_path, extra_info=JS_POSITION_BODY
+        )
+        source_files.add(args.js)
+
+    # Make the resulting HTML
+    htmldata, dependencies = rst2html(
+        args.presentation,
+        template_info,
+        args.auto_console,
+        args.skip_help,
+        args.skip_notes,
+        args.mathjax,
+        args.slide_numbers,
+    )
+    source_files.update(dependencies)
+
+    args.targetdir = "tmp"
+
+    # Write the HTML out
+    if not os.path.exists(args.targetdir):
+        os.makedirs(args.targetdir)
+    
+    indexHtmlPath = os.path.abspath(os.path.join(args.targetdir, "index.html"))
+    
+    with open(indexHtmlPath, "wb") as outfile:
+        outfile.write(htmldata)
+
+    # Copy supporting files
+    source_files.update(template_info.copy_resources(args.targetdir))
+
+    # Copy files from the source:
+    sourcedir = os.path.split(os.path.abspath(args.presentation))[0]
+    tree = html.fromstring(htmldata)
+    for image in tree.iterdescendants("img"):
+        filename = image.attrib["src"]
+        source_files.add(copy_resource(filename, sourcedir, args.targetdir))
+    for source in tree.iterdescendants("source"):
+        filename = source.attrib["src"]
+        source_files.add(copy_resource(filename, sourcedir, args.targetdir))
+    
+    # Code for handling iframe sources
+    for iframe in tree.iterdescendants("iframe"):
+        iframe_src = iframe.attrib.get("src")
+        if iframe_src:
+            filename = iframe_src.split("/")[-1]
+            targetpath = os.path.join(args.targetdir, f"iframe/{filename}")
+            source_files.add(
+                copy_resource(
+                    iframe_src,
+                    sourcedir,
+                    args.targetdir,
+                    sourcepath=None,
+                    targetpath=targetpath
+                )
+            )
+            iframe.attrib["src"] = f"iframe/{filename}"
+
+    RE_CSS_URL = re.compile(rb"""url\(['"]?(.*?)['"]?[\)\?\#]""")
+
+    # Copy any files referenced by url() in the css-files:
+    for resource in template_info.resources:
+        if resource.resource_type != CSS_RESOURCE:
+            continue
+        # path in CSS is relative to CSS file; construct source/dest accordingly
+        css_base = template_info.template_root if resource.is_in_template else sourcedir
+        css_sourcedir = os.path.dirname(os.path.join(css_base, resource.filepath))
+        css_targetdir = os.path.dirname(
+            os.path.join(args.targetdir, resource.final_path())
+        )
+        uris = RE_CSS_URL.findall(template_info.read_data(resource))
+        uris = [uri.decode() for uri in uris]
+        if resource.is_in_template and template_info.builtin_template:
+            for filename in uris:
+                template_info.add_resource(
+                    filename, OTHER_RESOURCE, target=css_targetdir, is_in_template=True
+                )
+        else:
+            for filename in uris:
+                source_files.add(copy_resource(filename, css_sourcedir, css_targetdir))
+
+    # ==========
+    
+    prepare_for_pdf(indexHtmlPath)
+    
+    converter.convert(f'file:///{indexHtmlPath}', args.pdf_output_path,install_driver=False,print_options= {"landscape":True})
+    
+    shutil.rmtree(args.targetdir)
 
     return {os.path.abspath(f) for f in source_files if f}
