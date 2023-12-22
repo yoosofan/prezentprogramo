@@ -234,6 +234,23 @@ def generate(args):
     for source in tree.iterdescendants("source"):
         filename = source.attrib["src"]
         source_files.add(copy_resource(filename, sourcedir, args.targetdir))
+        
+    # Code for handling iframe sources
+    for iframe in tree.iterdescendants("iframe"):
+        iframe_src = iframe.attrib.get("src")
+        if iframe_src:
+            filename = iframe_src.split("/")[-1]
+            targetpath = os.path.join(args.targetdir, f"iframe/{filename}")
+            source_files.add(
+                copy_resource(
+                    iframe_src,
+                    sourcedir,
+                    args.targetdir,
+                    sourcepath=None,
+                    targetpath=targetpath
+                )
+            )
+            iframe.attrib["src"] = f"iframe/{filename}"
 
     RE_CSS_URL = re.compile(rb"""url\(['"]?(.*?)['"]?[\)\?\#]""")
 
@@ -374,6 +391,23 @@ def generate_pdf(args):
     for source in tree.iterdescendants("source"):
         filename = source.attrib["src"]
         source_files.add(copy_resource(filename, sourcedir, args.targetdir))
+    
+    # Code for handling iframe sources
+    for iframe in tree.iterdescendants("iframe"):
+        iframe_src = iframe.attrib.get("src")
+        if iframe_src:
+            filename = iframe_src.split("/")[-1]
+            targetpath = os.path.join(args.targetdir, f"iframe/{filename}")
+            source_files.add(
+                copy_resource(
+                    iframe_src,
+                    sourcedir,
+                    args.targetdir,
+                    sourcepath=None,
+                    targetpath=targetpath
+                )
+            )
+            iframe.attrib["src"] = f"iframe/{filename}"
 
     RE_CSS_URL = re.compile(rb"""url\(['"]?(.*?)['"]?[\)\?\#]""")
 
