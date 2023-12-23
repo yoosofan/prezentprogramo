@@ -1,4 +1,4 @@
-// Main prezenta js file
+// Main Bildumilo js file
 ( function( document ) {
     "use strict";
 
