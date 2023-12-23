@@ -5,6 +5,7 @@ from lxml import etree, html
 from pkg_resources import resource_string
 from lxml import html
 from pyhtml2pdf import converter
+from screeninfo import get_monitors
 from .parse import rst2xml, SlideMaker
 from .position import position_slides
 from .template import (
@@ -49,12 +50,13 @@ def rst2html(
     sm = SlideMaker(tree, skip_notes=skip_notes)
     tree = sm.walk()
 
-    default_movement_from_data_width = None
+    data_width = None
     # Pick up CSS information from the tree:
     for attrib, value in tree.attrib.items():
 
         if attrib.startswith('data-width'):
-            default_movement_from_data_width = value
+
+            data_width = value
 
         if attrib.startswith("css"):
 
@@ -115,8 +117,11 @@ def rst2html(
                 extra_info=JS_POSITION_HEADER,
             )
 
+    # Set step width
+    set_step_width(tree, data_width)
+
     # Position all slides
-    position_slides(tree, default_movement_from_args, default_movement_from_data_width)
+    position_slides(tree, default_movement_from_args, data_width)
 
     # Add the template info to the tree:
     tree.append(template_info.xml_node())
@@ -145,6 +150,20 @@ def rst2html(
     result = html.tostring(tree)
 
     return template_info.doctype + result, dependencies
+
+def set_step_width(tree, data_width):
+    step_divs = tree.findall("step")
+    width = None
+    if data_width:
+        width = data_width
+    else:
+        presentation_monitor = get_monitors()[-1]  # Assuming the last monitor is for presentation
+        width = presentation_monitor.width
+        tree.attrib["data-width"] = str(width)
+
+    # Add width style to each found div
+    for div in step_divs:
+        div.set('style', f'width: {width}px;')  # Adding width style
 
 
 def copy_resource(filename, sourcedir, targetdir, sourcepath=None, targetpath=None):
