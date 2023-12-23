@@ -12,7 +12,7 @@ from watchdog.events import FileSystemEventHandler
 
 from .generate import generate, generate_pdf
 
-__version__ = pkg_resources.require("prezenta")[0].version
+__version__ = pkg_resources.require("bildumilo")[0].version
 
 
 class HovercraftEventHandler(FileSystemEventHandler):
@@ -99,7 +99,7 @@ def create_arg_parser():
         help=(
             "The directory where the presentation is saved. Will be created "
             "if it does not exist. If you do not specify a targetdir "
-            "prezenta will instead start a webserver and serve the "
+            "bildumilo will instead start a webserver and serve the "
             "presentation from that server."
         ),
     )
