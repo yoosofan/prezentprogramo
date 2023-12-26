@@ -66,14 +66,6 @@ xmlns="http://www.w3.org/1999/xhtml">
       </script>
     </xsl:for-each>
 
-    <xsl:if test="/document/@data-width">
-      <style type="text/css">
-        .step {
-          width: <xsl:value-of select="/document/@data-width"/>px;
-        }
-      </style>
-    </xsl:if>
-
 
   </head>
   <body class="impress-not-supported">

@@ -216,54 +216,60 @@ def serve_presentation(args):
         generate(args)
     else:
         # Server mode. Start a server that serves a temporary directory.
+        args.presentation = os.path.abspath(args.presentation)
+        dir_name = os.path.dirname(args.presentation)
+        file_name = os.path.basename(args.presentation)
+        targetdir_name = os.path.splitext(file_name)[0]
+        targetdir = os.path.join(dir_name, targetdir_name)
+        args.targetdir = targetdir
 
-        with TemporaryDirectory() as targetdir:
-            args.targetdir = targetdir
-            args.presentation = os.path.abspath(args.presentation)
+        # Create the directory if it doesn't exist
+        if not os.path.exists(targetdir):
+            os.makedirs(targetdir)
 
-            # Set up watchdog to regenerate presentation if saved.
-            event = threading.Event()
-            event.set()
-            thread = threading.Thread(target=generate_and_observe, args=(args, event))
+        # Set up watchdog to regenerate presentation if saved.
+        event = threading.Event()
+        event.set()
+        thread = threading.Thread(target=generate_and_observe, args=(args, event))
+        try:
+            # Serve presentation
+            if ":" in args.port:
+                bind, port = args.port.split(":")
+            else:
+                bind, port = "0.0.0.0", args.port
+            port = int(port)
+
+            # First create the server. This checks that we can connect to
+            # the port we want to.
+            os.chdir(targetdir)
+            server = HTTPServer((bind, port), SimpleHTTPRequestHandler)
+            print("Serving HTTP on", bind, "port", port, "...")
+
             try:
-                # Serve presentation
-                if ":" in args.port:
-                    bind, port = args.port.split(":")
-                else:
-                    bind, port = "0.0.0.0", args.port
-                port = int(port)
-
-                # First create the server. This checks that we can connect to
-                # the port we want to.
-                os.chdir(targetdir)
-                server = HTTPServer((bind, port), SimpleHTTPRequestHandler)
-                print("Serving HTTP on", bind, "port", port, "...")
+                # Now generate the presentation
+                thread.start()
 
                 try:
-                    # Now generate the presentation
-                    thread.start()
-
-                    try:
-                        # All is good, start the server
-                        server.serve_forever()
-                    except KeyboardInterrupt:
-                        print("\nKeyboard interrupt received, exiting.")
-                    finally:
-                        # Server exited
-                        server.server_close()
-
+                    # All is good, start the server
+                    server.serve_forever()
+                except KeyboardInterrupt:
+                    print("\nKeyboard interrupt received, exiting.")
                 finally:
-                    # Stop the generation thread
-                    event.clear()
-                    # Wait for it to end
-                    thread.join()
+                    # Server exited
+                    server.server_close()
 
-            except PermissionError:
-                print("Can't bind to port %s:%s: No permission" % (bind, port))
-            except OSError as e:
-                if e.errno == 98:
-                    print(
-                        "Can't bind to port %s:%s: port already in use" % (bind, port)
-                    )
-                else:
-                    raise
+            finally:
+                # Stop the generation thread
+                event.clear()
+                # Wait for it to end
+                thread.join()
+
+        except PermissionError:
+            print("Can't bind to port %s:%s: No permission" % (bind, port))
+        except OSError as e:
+            if e.errno == 98:
+                print(
+                    "Can't bind to port %s:%s: port already in use" % (bind, port)
+                )
+            else:
+                raise
