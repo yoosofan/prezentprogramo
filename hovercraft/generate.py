@@ -55,7 +55,6 @@ def rst2html(
     for attrib, value in tree.attrib.items():
 
         if attrib.startswith('data-width'):
-
             data_width = value
 
         if attrib.startswith("css"):
