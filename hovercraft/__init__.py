@@ -9,11 +9,80 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 from tempfile import TemporaryDirectory
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
+from docutils import nodes
+from docutils.parsers.rst import Directive, directives
+from graphviz import Source
 
 from .generate import generate, generate_pdf
 
 __version__ = pkg_resources.require("bildumilo")[0].version
 
+class YoGraphvizDirective(Directive):
+    has_content = True
+    required_arguments = 0
+    optional_arguments = 0
+    option_spec = {
+        'alt': str,
+        'height': int,
+        'width': int,
+        'scale': float,
+        'align': str,
+        'class': str,
+    }
+
+    count = 0 
+
+    def run(self):
+        graphviz_code = '\n'.join(self.content)
+        options = self.options
+
+        try:
+            # Get the path of the input .rst file
+            rst_file_path = os.path.abspath(self.state.document.current_source)
+            rst_directory = os.path.dirname(rst_file_path)
+            rst_filename = os.path.splitext(os.path.basename(rst_file_path))[0]
+
+            # Create a 'img' directory inside the same directory as the input .rst file
+            graphs_directory = os.path.join(rst_directory, rst_filename, 'img')
+            os.makedirs(graphs_directory, exist_ok=True)
+
+            # Generate the graph image using Graphviz and save it to the 'img' directory
+            dot = Source(graphviz_code)
+            dot.format = 'png'  # Output format
+
+            # Increment the count for each instance
+            self.__class__.count += 1
+
+            graph_filename = f"graph_{self.__class__.count}"
+            graph_path = os.path.join(graphs_directory, graph_filename)
+            dot.render(filename=graph_path, cleanup=True, format='png', quiet=True)
+            relative_image_path = os.path.relpath(graph_path, rst_directory)
+
+            if not relative_image_path.endswith('.png'):
+                relative_image_path = f"{relative_image_path}.png"
+            image_node = nodes.image(uri=relative_image_path, format='png')
+
+            # Apply options to the image node
+            if 'alt' in options:
+                image_node['alt'] = options['alt']
+            if 'class' in options:
+                image_node['classes'] += options['class'].split()
+            if 'width' in options:
+                image_node['width'] = options['width']
+            if 'height' in options:
+                image_node['height'] = options['height']
+            if 'scale' in options:
+                image_node['scale'] = options['scale']
+            if 'align' in options:
+                image_node['align'] = options['align']
+            return [image_node]
+
+        except Exception as e:
+            error_node = nodes.error()
+            error_node += nodes.Text(f"Error generating Graphviz image: {str(e)}")
+            return [error_node]
+        
+directives.register_directive('yographviz', YoGraphvizDirective)
 
 class HovercraftEventHandler(FileSystemEventHandler):
     def __init__(self, filelist):
