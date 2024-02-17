@@ -51,6 +51,11 @@ Juan Bondi has made videos of how to install Hovercraft:
 Chromium-chromedriver is needed to generate PDF from RST presentations files (You can only Install Chrome Browser)
 Hovercraft is untested on Windows, but there is no reason it shouldn't work, at least in theory.
 
+TODO
+----
+* Remove extra files:
+    * Prevent making extra grap_ii.png for changing yographviz
+* Add an option to run a new instance of web browser
 
 .. _impress.js: http://github.com/bartaz/impress.js
 .. _demo: https://regebro.github.io/hovercraft
