@@ -256,7 +256,7 @@ def create_arg_parser():
         "--version",
         action="version",
         # help=('Display version and exit.'),
-        version="Hovercraft! %s" % __version__,
+        version="bildumilo %s" % __version__,
     )
     parser.add_argument(
         "-pdf",
