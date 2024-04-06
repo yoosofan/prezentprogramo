@@ -84,6 +84,62 @@ class YoGraphvizDirective(Directive):
         
 directives.register_directive('yographviz', YoGraphvizDirective)
 
+'''
+# https://github.com/liuyug/python-docutils-graphviz/blob/master/docutils_graphviz.py
+# https://graphviz.readthedocs.io/en/stable/manual.html
+# https://graphviz.readthedocs.io/en/stable/api.html#graphviz.Digraph.pipe
+# https://pypi.org/project/beautifulsoup4/
+# https://www.crummy.com/software/BeautifulSoup/
+# https://www.crummy.com/software/BeautifulSoup/bs4/doc/
+# https://stackabuse.com/parsing-xml-with-beautifulsoup-in-python/
+# https://www.tutorialspoint.com/beautiful_soup/beautiful_soup_souping_the_page.htm
+# https://developer.mozilla.org/en-US/docs/Web/SVG
+# https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Adding_vector_graphics_to_the_Web
+
+# pip3 install beautifulsoup4
+
+import graphviz
+from bs4 import BeautifulSoup
+
+gfc="""
+  digraph {
+    rankdir = "LR";
+    node [shape=circle];
+    END [shape=doublecircle, label="2"];
+    B [shape=plaintext];
+    0 -> 1 [label="+"];
+    1 -> END [label="E"];
+    0 -> END [label="λ"];
+  }
+"""
+
+dot = graphviz.Source(gfc)
+fullDocTypeSvg = dot.pipe(encoding='utf-8', format='svg', quiet=True) 
+#soup = BeautifulSoup(fullDocTypeSvg, 'html.parser')
+#soup = BeautifulSoup(fullDocTypeSvg, 'html5lib')
+soup = BeautifulSoup(fullDocTypeSvg, 'xml')
+soupJustSvg = soup.find('svg')
+
+# https://developer.mozilla.org/en-US/docs/Web/SVG
+
+if soupJustSvg:
+  if 'class' in options:
+      soupJustSvg.attrs['classes'] += options['class'].split()
+  if 'width' in options:
+      soupJustSvg.attrs['width'] = options['width']
+  if 'height' in options:
+      soupJustSvg.attrs['height'] = options['height']
+  if 'scale' in options:
+      soupJustSvg.attrs['scale'] = options['scale']
+  if 'align' in options:
+      soupJustSvg.attrs['align'] = options['align']
+  img = Str(soupJustSvg)
+else:
+  img = 'It is not SVG'
+
+return [nodes.raw('', img, format='html')]
+'''
+
 class HovercraftEventHandler(FileSystemEventHandler):
     def __init__(self, filelist):
         self.filelist = filelist
