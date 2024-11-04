@@ -87,7 +87,8 @@ TODO
     * https://github.com/renatopp/pyramid-blog/blob/4cc950d6a82eeaa912c9e1111fe25a8cb836d660/blog/blog/libs/rest/reSTpygments.py#L73
 
     * https://pygraphviz.github.io/documentation/stable/install.html
-    
+* Remove MathJax and use current default as --output-math=MathML
+
 .. _impress.js: http://github.com/bartaz/impress.js
 .. _demo: https://regebro.github.io/hovercraft
 .. _readthedocs.org: https://hovercraft.readthedocs.io/
