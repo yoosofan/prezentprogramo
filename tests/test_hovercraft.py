@@ -262,7 +262,8 @@ class HTMLTests(unittest.TestCase):
                 result = outfile.read()
                 self.assertIn(
                     b'<script type="text/javascript" '
-                    b'src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">',
+                    b'src=js/MathJax/es5/tex-mml-chtml.js',
+                    #b'src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">',
                     result,
                 )
                 self.assertIn(

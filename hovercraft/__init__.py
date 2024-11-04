@@ -288,8 +288,9 @@ def create_arg_parser():
     parser.add_argument(
         "--mathjax",
         default=os.environ.get(
-            "HOVERCRAFT_MATHJAX",
-            "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML",
+            "HOVERCRAFT_MATHJAX"
+            "js/MathJax/es5/tex-mml-chtml.js",
+            #"https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML",
         ),
         help=(
             "The URL to the mathjax library."
