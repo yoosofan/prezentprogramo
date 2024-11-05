@@ -31,18 +31,20 @@ It is better to use virtual environment::
 Download the code in a directory let's name it `src_dir/path/`
 The easiest way is to install pip_, and then run::
 
+    $ pip3 install git+https://github.com/yoosofan/bildumilo
+    
+    or
+    
     $ pip install ~/path/bildumilo/
     
     or
     
     $ python3 -m pip install ~/path/bildumilo/
 
-    or
-    
-    $ pip3 install git+https://github.com/yoosofan/bildumilo
 
+Use bildumilo::
 
-Use bildumilo
+    $ bildumilo bildumilo/docs/examples/tutorial.rst
 
 Then you can deactivate virtual environment::
 
