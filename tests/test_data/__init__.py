@@ -67,6 +67,8 @@ HTML_OUTPUTS = {
         b'</tr></table></div><script type="text/javascript" '
         b'src="js/impress.js"></script><script type="text/javascript" '
         b'src="js/impressConsole.js"></script><script type="text/javascript" '
+        b'src="js/gotoSlide.js"></script><script type="text/javascript" '
+        b'src="js/MathJax/es5/tex-mml-chtml.js"></script><script type="text/javascript" '
         b'src="js/hovercraft.js"></script><script type="text/javascript" '
         b'src="extra.js"></script></body></html>'
     ),
@@ -117,6 +119,8 @@ HTML_OUTPUTS = {
         b'this help</td></tr></table></div><script type="text/javascript" '
         b'src="js/impress.js"></script><script type="text/javascript" '
         b'src="js/impressConsole.js"></script><script type="text/javascript" '
+        b'src="js/gotoSlide.js"></script><script type="text/javascript" '
+        b'src="js/MathJax/es5/tex-mml-chtml.js"></script><script type="text/javascript" '
         b'src="js/hovercraft.js"></script><script type="text/javascript" '
         b'src="extra.js"></script></body></html>'
     ),
