@@ -54,7 +54,7 @@ def rst2html(
     # Pick up CSS information from the tree:
     for attrib, value in tree.attrib.items():
 
-        if attrib.startswith('data-width'):
+        if attrib.startswith("data-width"):
             data_width = value
 
         if attrib.startswith("css"):
@@ -150,19 +150,22 @@ def rst2html(
 
     return template_info.doctype + result, dependencies
 
+
 def set_step_width(tree, data_width):
     step_divs = tree.findall("step")
     width = None
     if data_width:
         width = data_width
     else:
-        presentation_monitor = get_monitors()[-1]  # Assuming the last monitor is for presentation
+        presentation_monitor = get_monitors()[
+            -1
+        ]  # Assuming the last monitor is for presentation
         width = presentation_monitor.width
         tree.attrib["data-width"] = str(width)
 
     # Add width style to each found div
     for div in step_divs:
-        div.set('style', f'width: {width}px;')  # Adding width style
+        div.set("style", f"width: {width}px;")  # Adding width style
 
 
 def copy_resource(filename, sourcedir, targetdir, sourcepath=None, targetpath=None):
@@ -245,14 +248,15 @@ def generate(args):
                 sourcedir,
                 args.targetdir,
                 sourcepath=None,
-                targetpath=targetpath))
+                targetpath=targetpath,
+            )
+        )
         image.attrib["src"] = f"img/{filename}"
-
 
     for source in tree.iterdescendants("source"):
         filename = source.attrib["src"]
         source_files.add(copy_resource(filename, sourcedir, args.targetdir))
-        
+
     # Code for handling iframe sources
     for iframe in tree.iterdescendants("iframe"):
         iframe_src = iframe.attrib.get("src")
@@ -265,7 +269,7 @@ def generate(args):
                     sourcedir,
                     args.targetdir,
                     sourcepath=None,
-                    targetpath=targetpath
+                    targetpath=targetpath,
                 )
             )
             iframe.attrib["src"] = f"iframe/{filename}"
@@ -302,14 +306,15 @@ def generate(args):
 
     return {os.path.abspath(f) for f in source_files if f}
 
+
 def prepare_for_pdf(html_file_path):
     # Read the HTML content from the file
     with open(html_file_path, "r") as html_file:
         html_content = html_file.read()
-        
+
         html_content = html_content.replace(
-        '<head>',
-        '''<head>
+            "<head>",
+            """<head>
         <style>
             .pdfContainer
             {
@@ -324,8 +329,8 @@ def prepare_for_pdf(html_file_path):
             {
                 opacity: 1 !important;
             }
-        </style>'''
-    )
+        </style>""",
+        )
 
     # Find and delete the specific div
     tree = html.fromstring(html_content)
@@ -350,7 +355,6 @@ def prepare_for_pdf(html_file_path):
     # Write the modified HTML back to the file
     with open(html_file_path, "w") as html_file:
         html_file.write(html_content)
-
 
 
 def generate_pdf(args):
@@ -391,9 +395,9 @@ def generate_pdf(args):
     # Write the HTML out
     if not os.path.exists(args.targetdir):
         os.makedirs(args.targetdir)
-    
+
     indexHtmlPath = os.path.abspath(os.path.join(args.targetdir, "index.html"))
-    
+
     with open(indexHtmlPath, "wb") as outfile:
         outfile.write(htmldata)
 
@@ -409,7 +413,7 @@ def generate_pdf(args):
     for source in tree.iterdescendants("source"):
         filename = source.attrib["src"]
         source_files.add(copy_resource(filename, sourcedir, args.targetdir))
-    
+
     # Code for handling iframe sources
     for iframe in tree.iterdescendants("iframe"):
         iframe_src = iframe.attrib.get("src")
@@ -422,7 +426,7 @@ def generate_pdf(args):
                     sourcedir,
                     args.targetdir,
                     sourcepath=None,
-                    targetpath=targetpath
+                    targetpath=targetpath,
                 )
             )
             iframe.attrib["src"] = f"iframe/{filename}"
@@ -451,11 +455,16 @@ def generate_pdf(args):
                 source_files.add(copy_resource(filename, css_sourcedir, css_targetdir))
 
     # ==========
-    
+
     prepare_for_pdf(indexHtmlPath)
-    
-    converter.convert(f'file:///{indexHtmlPath}', args.pdf_output_path,install_driver=False,print_options= {"landscape":True})
-    
+
+    converter.convert(
+        f"file:///{indexHtmlPath}",
+        args.pdf_output_path,
+        install_driver=False,
+        print_options={"landscape": True},
+    )
+
     shutil.rmtree(args.targetdir)
 
     return {os.path.abspath(f) for f in source_files if f}

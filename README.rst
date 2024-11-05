@@ -37,6 +37,11 @@ The easiest way is to install pip_, and then run::
     
     $ python3 -m pip install ~/path/bildumilo/
 
+    or
+    
+    $ pip3 install git+https://github.com/yoosofan/bildumilo
+
+
 Use bildumilo
 
 Then you can deactivate virtual environment::
