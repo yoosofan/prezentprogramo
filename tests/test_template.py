@@ -52,6 +52,7 @@ class TemplateInfoTests(unittest.TestCase):
         self.assertIn("js/impress.js", template_files)
         self.assertIn("js/impressConsole.js", template_files)
         self.assertIn("js/hovercraft.js", template_files)
+        self.assertIn("js/MathJax/es5/tex-mml-chtml.js", template_files)
 
         js_bodies = [
             each.filepath
@@ -61,6 +62,8 @@ class TemplateInfoTests(unittest.TestCase):
         self.assertIn("js/impress.js", js_bodies)
         self.assertIn("js/impressConsole.js", js_bodies)
         self.assertIn("js/hovercraft.js", js_bodies)
+        self.assertIn("js/gotoSlide.js", js_bodies)
+        self.assertIn("js/MathJax/es5/tex-mml-chtml.js", js_bodies)
 
         js_headers = [
             each.filepath
@@ -112,6 +115,8 @@ class TemplateInfoNodeTests(unittest.TestCase):
                 b'<js src="js/dummy.js"/></header>'
                 b'<body><js src="js/impress.js"/><js src="js/impressConsole.js"/>'
                 b'<js src="js/hovercraft.js"/>'
+                b'<js src="js/gotoSlide.js"/>'
+                b'<js src="js/MathJax/es5/tex-mml-chtml.js"/>'
                 b"</body></templateinfo>"
             ),
         )

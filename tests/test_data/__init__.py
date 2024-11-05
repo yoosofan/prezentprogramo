@@ -39,6 +39,8 @@ HTML_OUTPUTS = {
         b'</tr></table></div><script type="text/javascript" '
         b'src="js/impress.js"></script><script type="text/javascript" '
         b'src="js/impressConsole.js"></script><script type="text/javascript" '
+        b'src="js/gotoSlide.js"></script><script type="text/javascript" '
+        b'src="js/MathJax/es5/tex-mml-chtml.js"></script><script type="text/javascript" '
         b'src="js/hovercraft.js"></script></body></html>'
     ),
     "extra_js": (
@@ -170,6 +172,7 @@ HTML_OUTPUTS = {
         b'<script type="text/javascript" src="js/impress.js"></script>'
         b'<script type="text/javascript" src="js/gotoSlide.js"></script>'
         b'<script type="text/javascript" src="js/hovercraft.js"></script>'
+        b'<script type="text/javascript" src="js/MathJax/es5/tex-mml-chtml.js"></script>'
         b'<script type="text/javascript" src="extra.js"></script>'
         b"</body></html>"
     ),

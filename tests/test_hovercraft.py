@@ -124,7 +124,7 @@ class HTMLTests(unittest.TestCase):
             js_files = os.listdir(os.path.join(tmpdir, "js"))
             self.assertEqual(
                 set(js_files),
-                {"impress.js", "hovercraft.js", "impressConsole.js", "dummy.js"},
+                {"impress.js", "hovercraft.js", "impressConsole.js", "dummy.js", "gotoSlide.js","tex-mml-chtml.js"},
             )
             css_files = os.listdir(os.path.join(tmpdir, "css"))
             self.assertEqual(
@@ -168,7 +168,7 @@ class HTMLTests(unittest.TestCase):
             js_files = os.listdir(os.path.join(tmpdir, "js"))
             self.assertEqual(
                 set(js_files),
-                {"impress.js", "hovercraft.js", "impressConsole.js", "dummy.js"},
+                {"impress.js", "hovercraft.js", "impressConsole.js", "dummy.js", "gotoSlide.js", "tex-mml-chtml.js"},
             )
             css_files = os.listdir(os.path.join(tmpdir, "css"))
             self.assertEqual(
@@ -204,7 +204,7 @@ class HTMLTests(unittest.TestCase):
 
             js_files = os.listdir(os.path.join(tmpdir, "js"))
             self.assertEqual(
-                set(js_files), {"impress.js", "hovercraft.js", "gotoSlide.js"}
+                set(js_files), {"impress.js", "hovercraft.js", "gotoSlide.js", "tex-mml-chtml.js"}
             )
             css_files = os.listdir(os.path.join(tmpdir, "css"))
             self.assertEqual(set(css_files), {"hovercraft.css", "highlight.css"})
