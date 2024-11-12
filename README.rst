@@ -61,6 +61,7 @@ Hovercraft is untested on Windows, but there is no reason it shouldn't work, at 
 
 TODO
 ----
+* Copy MathJax fonts bildumilo/hovercraft/templates/default/js/MathJax/es5/output/chtml/fonts/woff-v2
 * Remove extra files:
     * Prevent making extra grap_ii.png for changing yographviz
         * G.draw("test.svg", prog= 'dot', format='svg:cairo') 
