@@ -15,6 +15,8 @@ from graphviz import Source
 
 from .generate import generate, generate_pdf
 
+import hashlib
+
 __version__ = pkg_resources.require("bildumilo")[0].version
 
 
@@ -54,9 +56,13 @@ class YoGraphvizDirective(Directive):
             # Increment the count for each instance
             self.__class__.count += 1
 
-            graph_filename = f"graph_{self.__class__.count}"
+            graph_filename = 'yoo_graphviz_'
+            graph_filename += hashlib.md5(graphviz_code.encode('utf-8')).hexdigest()
+                      
             graph_path = os.path.join(graphs_directory, graph_filename)
-            dot.render(filename=graph_path, cleanup=True, format="png", quiet=True)
+            
+            if not os.path.exists(graph_path):
+              dot.render(filename=graph_path, cleanup=True, format="png", quiet=True)
             relative_image_path = os.path.relpath(graph_path, rst_directory)
 
             if not relative_image_path.endswith(".png"):
@@ -116,7 +122,7 @@ gfc="""
 """
 
 dot = graphviz.Source(gfc)
-fullDocTypeSvg = dot.pipe(encoding='utf-8', format='svg', quiet=True) 
+fullDocTypeSvg = dot.pipe(encoding='utf-8', format='svg', quiet=True)
 #soup = BeautifulSoup(fullDocTypeSvg, 'html.parser')
 #soup = BeautifulSoup(fullDocTypeSvg, 'html5lib')
 soup = BeautifulSoup(fullDocTypeSvg, 'xml')

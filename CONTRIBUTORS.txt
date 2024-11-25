@@ -1,6 +1,9 @@
 Contributors
 ------------
-Bildumilo was written by Ahmad Yoosofan <yoosofan@gmx.com> and his students, and is licensed with GPLv3.
+Bildumilo was written by Ahmad Yoosofan <yoosofan@gmx.com> and his students listed below, and is licensed with GPLv3 based on Hovercraft.
+
+* `Meisam HakimiNia <https://t.me/meisamhakimi>`_
+* `Hamid Akhtari <https://t.me/HamidAkhtari>`_
 
 Hovercraft! was written by Lennart Regebro <regebro@gmail.com>, and is licensed
 with an MIT license, except for the following:
