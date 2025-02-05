@@ -24,18 +24,17 @@ Bildumilo requires Python 3 and can be installed like any Python package.
 
 It is better to use virtual environment::
 
-    $ cd /destination/directory/
+    $ cd ~/virtual_environment/path/
     $ python -m venv myvenv
     $ source myvenv/bin/activate
 
-Download the code in a directory let's name it `src_dir/path/`
-The easiest way is to install pip_, and then run::
+The easiest way is to install is by pip_ and git, then run::
 
     $ pip3 install git+https://github.com/yoosofan/bildumilo
     
-    or
+Or download the code in a directory let's name it `~/path/bildumilo/` then::
     
-    $ pip install ~/path/bildumilo/
+    $ pip3 install ~/path/bildumilo/
     
     or
     
