@@ -28,7 +28,7 @@ It is better to use virtual environment::
     $ python -m venv myvenv
     $ source myvenv/bin/activate
 
-The easiest way is to install is by pip_ and git, then run::
+The easiest way to install bildumilo is by using pip_ and git, then run::
 
     $ pip3 install git+https://github.com/yoosofan/bildumilo
     
