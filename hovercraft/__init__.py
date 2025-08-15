@@ -198,7 +198,11 @@ def generate_and_observe(args, event):
         observer.stop()
         observer.join()
 
-
+def yoo_run_browser(bind: str, port:int):
+    time.sleep(0.1)
+    import webbrowser
+    webbrowser.open('http://'+bind+':'+str(port))
+    
 def main(args=None):
     parser = create_arg_parser()
     args = parser.parse_args(args=args)
@@ -207,7 +211,7 @@ def main(args=None):
         generate_pdf(args)
     else:
         serve_presentation(args)
-
+    
 
 def create_arg_parser():
     # That the argparse default strings are lowercase is ugly.
@@ -367,6 +371,7 @@ def serve_presentation(args):
         event = threading.Event()
         event.set()
         thread = threading.Thread(target=generate_and_observe, args=(args, event))
+
         try:
             # Serve presentation
             if ":" in args.port:
@@ -381,8 +386,12 @@ def serve_presentation(args):
             server = HTTPServer((bind, port), SimpleHTTPRequestHandler)
             print("Serving HTTP on", bind, "port", port, "...")
 
+            th1 = threading.Thread(target=yoo_run_browser, args=(bind, port,))
+
             try:
                 # Now generate the presentation
+                th1.start()
+
                 thread.start()
 
                 try:
@@ -399,6 +408,7 @@ def serve_presentation(args):
                 event.clear()
                 # Wait for it to end
                 thread.join()
+                th1.join()
 
         except PermissionError:
             print("Can't bind to port %s:%s: No permission" % (bind, port))
