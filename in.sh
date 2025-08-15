@@ -23,6 +23,11 @@ function install_uv_python(){
     uv python install 3.13.6
     uv venv --python 3.13.6  ~/install/uv13.6
     source ~/install/uv13.6
+
+    uv tool install ini2toml[full]
+    ini2toml --help
+    ini2toml -o setup.toml setup.cfg
+
 }
 
 

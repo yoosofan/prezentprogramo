@@ -2,7 +2,8 @@ import os
 import re
 import shutil
 from lxml import etree, html
-from pkg_resources import resource_string
+#from pkg_resources import resource_string
+import importlib.resources
 from lxml import html
 from pyhtml2pdf import converter
 from screeninfo import get_monitors
@@ -23,7 +24,9 @@ class ResourceResolver(etree.Resolver):
     def resolve(self, url, pubid, context):
         if url.startswith("resource:"):
             prefix, filename = url.split(":", 1)
-            return self.resolve_string(resource_string(__name__, filename), context)
+            #return self.resolve_strinog(resource_string(__name__, filename), context)
+            ref = importlib.resources.files(__name__).joinpath(filename)
+            return self.resolve_string(ref.read_bytes(), context)
 
 
 def rst2html(

@@ -60,11 +60,6 @@ Hovercraft is untested on Windows, but there is no reason it shouldn't work, at 
 
 TODO
 ----
-* Repalce setuptools because of the followin error message::
-
-    hovercraft/__init__.py:6: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
-      import pkg_resources
-
 * Copy MathJax fonts bildumilo/hovercraft/templates/default/js/MathJax/es5/output/chtml/fonts/woff-v2
 * Remove extra files:
     * Prevent making extra grap_ii.png for changing yographviz

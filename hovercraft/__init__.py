@@ -3,7 +3,12 @@ import gettext
 import os
 import threading
 import time
-import pkg_resources
+
+#import pkg_resources
+from importlib.metadata import version, PackageNotFoundError
+from packaging.requirements import Requirement
+from packaging.version import parse as parse_version
+
 from collections import defaultdict
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from tempfile import TemporaryDirectory
@@ -17,7 +22,8 @@ from .generate import generate, generate_pdf
 
 import hashlib
 
-__version__ = pkg_resources.require("bildumilo")[0].version
+# __version__ = "3.0.1" #pkg_resources.require("bildumilo")[0].version
+__version__ = parse_version(version(Requirement("bildumilo").name))
 
 
 class YoGraphvizDirective(Directive):
