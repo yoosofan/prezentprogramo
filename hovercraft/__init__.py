@@ -207,7 +207,7 @@ def generate_and_observe(args, event):
 def yoo_run_browser(bind: str, port:int):
     time.sleep(0.1)
     import webbrowser
-    webbrowser.open('http://'+bind+':'+str(port))
+    webbrowser.open_new('http://'+bind+':'+str(port))
     
 def main(args=None):
     parser = create_arg_parser()

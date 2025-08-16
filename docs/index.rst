@@ -1,6 +1,6 @@
-.. Hovercraft! documentation master file.
+.. Bildumilo! documentation master file.
 
-Hovercraft! - Merging convenience and cool!
+Bildumilo! - Merging convenience and cool!
 ===========================================
 
 Contents:

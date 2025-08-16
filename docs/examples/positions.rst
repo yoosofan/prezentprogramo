@@ -1,12 +1,12 @@
 :title: Positioning tutorial
 :css: tutorial.css
 
-This is a tutorial for Hovercraft! positioning. It's meant to be read as
+This is a tutorial for Bildumilo! positioning. It's meant to be read as
 `source code <../_sources/examples/positions.txt>`_.
 
 You can render this presentation to HTML with the command::
 
-    hovercraft positions.rst outdir
+    bildumilo positions.rst outdir
 
 And then view the outdir/index.html file to see how it turned out.
 
@@ -56,7 +56,7 @@ Positioning fields
 
 Any field starting with ``data-`` will be converted to a ``data-`` attribute
 on the impress.js step. There is no filtering done, so if new attributes are
-supported by impress.js, they should just work from Hovercraft! as well.
+supported by impress.js, they should just work from Bildumilo! as well.
 
 The ones impress.js currently uses are::
 
@@ -99,7 +99,7 @@ But if we now need to insert a slide somewhere in between the slides above,
 we need to make room for it, and that means we have to reposition all the
 slides that come after. That quickly becomes annoying.
 
-Hovercraft! therefore supports relative positioning where you just give a
+Bildumilo! therefore supports relative positioning where you just give a
 relative coordinate to the last slide.
 
 ----
@@ -170,12 +170,12 @@ Older and less common browsers can also have problems with 3D effects.
 
 ----
 
-:hovercraft-path: m275,175 a150,150 0 0,1 -150,150
+:bildumilo-path: m275,175 a150,150 0 0,1 -150,150
 
 SVG paths
 =========
 
-The field ``:hovercraft-path:`` tells Hovercraft! to place the slides
+The field ``:bildumilo-path:`` tells Bildumilo! to place the slides
 along a SVG path. This enables you to put slides along a graphical shape.
 
 ----
@@ -185,7 +185,7 @@ SVG paths
 
 You can design the shape in a vector graphics program like Inkscape
 and then lift it out of the SVG file (which are in XML) and use it
-in Hovercraft!
+in Bildumilo!
 
 This example is an arc.
 

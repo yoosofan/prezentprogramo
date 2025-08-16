@@ -3,17 +3,17 @@ Templates
 
 Luckily, for most cases you don't need to create your own template, as the
 default template is very simple and most things you need to do is doable with
-css. However, I don't want Hovercraft! to set up a wall where it isn't
+css. However, I don't want Bildumilo! to set up a wall where it isn't
 flexible enough for your needs, so I added support to make your own templates.
 
 You need to create your own template if you are unsatisfied with the HTML
-that Hovercraft! generates, for example if you need to use another version of
+that Bildumilo! generates, for example if you need to use another version of
 HTML or if the reStructuredText you are using isn't being rendered in a way
 that is useful for you. Although if you aren't happy with the HTML generated
 from the reStructuredText that could very well be a bug, so open an issue on
 `Github`_ for discussion.
 
-Hovercraft! generates presentations by converting the reStructuredText into
+Bildumilo! generates presentations by converting the reStructuredText into
 XML and then using XSLT to translate the XML into HTML.
 
 Templates are directories with a configuration file, a template XSL file,
@@ -29,13 +29,13 @@ one to use by specifying the full path to the configuration file. However, if
 you just specify the template directory, ``template.cfg`` will be used.
 
 Template files are in configparser format, which is an extended ini-style
-format. They are very simple, and have only one section, ``[hovercraft]``. Any
+format. They are very simple, and have only one section, ``[Bildumilo]``. Any
 other sections will be ignored. Many of the parameters are lists that often
 do not fit on one line. In that case you can split the line up over several
 lines, but indenting the lines. The amount of indentation doesn't make any
 difference, except aesthetically.
 
-The parameters in the ``[hovercraft]`` section are:
+The parameters in the ``[Bildumilo]`` section are:
 
   * ``template``
     The name of the xsl template.
@@ -77,7 +77,7 @@ The parameters in the ``[hovercraft]`` section are:
 
 An example::
 
-    [hovercraft]
+    [bildumilo]
     template = template.xsl
 
     css = css/screen.css
@@ -105,7 +105,7 @@ The file specified with the ``template`` parameters is the actual XSLT
 template that will perform the translation from XML to HTML.
 
 Most of the time you can just copy the default template file in
-``hovercraft/templates/default/template.xsl`` and modify it. XSLT is very
+``bildumilo/templates/default/template.xsl`` and modify it. XSLT is very
 complex, but modifying the templates HTML is quite straightforward as long as
 you don't have to touch any of the ``<xsl:...>`` tags.
 
@@ -124,7 +124,7 @@ you can just include it in the template file with the following code::
 
     <xsl:import href="resource:templates/reST.xsl" />
 
-The ``resource:`` part here is not a part of XSLT, but a part of Hovercraft!
+The ``resource:`` part here is not a part of XSLT, but a part of Bildumilo!
 It tells the XSLT translation that the file specified should not be looked
 up on the file system, but as a Python package resource. Currently the
 ``templates/reST.xsl`` file is the only XSLT resource import available.
@@ -137,4 +137,4 @@ None of the XSLT files need to be copied to the target, and should not be
 listed as a resource in the template configuration file.
 
 
-.. _Github: https://github.com/regebro/hovercraft
+.. _Github: https://github.com/yoosofan/bildumilo

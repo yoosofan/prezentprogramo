@@ -48,16 +48,16 @@ things from bullet points to headings etc.
 You also have to position each slide separately, and if you insert a new
 slide in the middle, you have to reposition all the slides that follow.
 
-Hovercraft!
+bildumilo!
 -----------
 
 So what I want is a tool that takes the power, flexibility and convenience of
 reStructuredText and allows me to generate pan, rotate and zoom presentations
 with impress.js, without having to manually reposition each slide if I
 reorganize a little bit of the presentation. I couldn't find one, so I made
-Hovercraft.
+bildumilo.
 
-Hovercraft’s power comes from the combination of reStructuredText’s
+bildumilo’s power comes from the combination of reStructuredText’s
 convenience with the cool of impress.js, together with a flexible and
 powerful solution to position the slides.
 
@@ -90,7 +90,7 @@ There are four ways to position slides:
     awesome results, such as positioning the slides as snaking Python or
     similar.
 
-Hovercraft! also includes a presenter console that will
+bildumilo! also includes a presenter console that will
 show you your notes, slide previews and the time, essential tools for any
 presentation.
 
