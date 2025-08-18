@@ -22,7 +22,20 @@ function install_uv_python(){
     uv self update
     uv python install 3.13.6
     uv venv --python 3.13.6  ~/install/uv13.6
+    
     source ~/install/uv13.6
+    
+    uv tool install ruff@latest
+    
+    ruff check
+    ruff check --fix
+    
+    uv tool install flake8
+    flake8 .
+    flake8 --ignore=E501 .
+    
+    uv tool install autopep8
+    autopep8 --in-place --aggressive  --recursive --list-fixes --max-line-length 79 .
 
     uv tool install ini2toml[full]
     ini2toml --help

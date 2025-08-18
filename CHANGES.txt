@@ -18,6 +18,225 @@ Changes
 - Update xsl to support data-with
 - Rename the application and test by Ahmad Yoosofan
 
+List of Fixes by autopep8
+=========================
+(uv13.6) bildumilo$ uv tool install autopep8
+Resolved 2 packages in 1.14s
+Prepared 1 package in 1.22s
+Installed 2 packages in 3ms
+ + autopep8==2.3.2
+ + pycodestyle==2.14.0
+Installed 1 executable: autopep8
+(uv13.6) bildumilo$ 
+(uv13.6) bildumilo$ 
+(uv13.6) bildumilo$ autopep8 --in-place --aggressive  --recursive --list-fixes 
+E101 - Reindent all lines.
+E112 - Fix under-indented comments.
+E113 - Fix unexpected indentation.
+E115 - Fix under-indented comments.
+E116 - Fix over-indented comments.
+E117 - Fix over-indented.
+E121 - Fix a badly indented line.
+E122 - Fix a badly indented line.
+E123 - Fix a badly indented line.
+E124 - Fix a badly indented line.
+E125 - Fix indentation undistinguish from the next logical line.
+E126 - Fix a badly indented line.
+E127 - Fix a badly indented line.
+E128 - Fix a badly indented line.
+E129 - Fix a badly indented line.
+E131 - Fix indentation undistinguish from the next logical line.
+E133 - Fix indentation undistinguish from the next logical line.
+E201 - Remove extraneous whitespace.
+E202 - Remove extraneous whitespace.
+E203 - Remove extraneous whitespace.
+E204 - Remove extraneous whitespace.
+E211 - Remove extraneous whitespace.
+E221 - Fix extraneous whitespace around keywords.
+E222 - Fix extraneous whitespace around keywords.
+E223 - Fix extraneous whitespace around keywords.
+E224 - Remove extraneous whitespace around operator.
+E225 - Fix missing whitespace around operator.
+E226 - Fix missing whitespace around operator.
+E227 - Fix missing whitespace around operator.
+E228 - Fix missing whitespace around operator.
+E231 - Add missing whitespace.
+E241 - Fix extraneous whitespace around keywords.
+E242 - Remove extraneous whitespace around operator.
+E251 - Remove whitespace around parameter '=' sign.
+E252 - Fix missing whitespace around operator.
+E261 - Fix spacing after inline comment hash.
+E262 - Fix spacing after inline comment hash.
+E265 - Fix spacing after block comment hash.
+E266 - Fix too many block comment hashes.
+E271 - Fix extraneous whitespace around keywords.
+E272 - Fix extraneous whitespace around keywords.
+E273 - Fix extraneous whitespace around keywords.
+E274 - Fix extraneous whitespace around keywords.
+E275 - Fix extraneous whitespace around keywords.
+E301 - Add missing blank line.
+E302 - Add missing 2 blank lines.
+E303 - Remove extra blank lines.
+E304 - Remove blank line following function decorator.
+E305 - Add missing 2 blank lines after end of function or class.
+E306 - Add missing blank line.
+E401 - Put imports on separate lines.
+E402 - 
+E501 - Try to make lines fit within --max-line-length characters.
+E502 - Remove extraneous escape of newline.
+E701 - Put colon-separated compound statement on separate lines.
+E702 - Put semicolon-separated compound statement on separate lines.
+E703 - Put semicolon-separated compound statement on separate lines.
+E704 - Fix multiple statements on one line def
+E711 - Fix comparison with None.
+E712 - Fix (trivial case of) comparison with boolean.
+E713 - Fix (trivial case of) non-membership check.
+E714 - Fix object identity should be 'is not' case.
+E721 - fix comparison type
+E722 - fix bare except
+E731 - Fix do not assign a lambda expression check.
+W291 - Remove trailing whitespace.
+W292 - Remove trailing whitespace.
+W293 - Remove trailing whitespace.
+W391 - Remove trailing blank lines.
+W503 - 
+W504 - 
+W605 - 
+
+Latest Github Errors
+====================
+Run flake8 .
+./hovercraft/__init__.py:54:80: E501 line too long (87 > 79 characters)
+./hovercraft/__init__.py:58:80: E501 line too long (88 > 79 characters)
+./hovercraft/__init__.py:66:80: E501 line too long (84 > 79 characters)
+./hovercraft/__init__.py:71:80: E501 line too long (87 > 79 characters)
+./hovercraft/__init__.py:95:80: E501 line too long (82 > 79 characters)
+./hovercraft/__init__.py:274:80: E501 line too long (99 > 79 characters)
+./hovercraft/__init__.py:318:80: E501 line too long (81 > 79 characters)
+./hovercraft/__init__.py:331:80: E501 line too long (94 > 79 characters)
+./hovercraft/__init__.py:359:80: E501 line too long (85 > 79 characters)
+./hovercraft/__init__.py:382:80: E501 line too long (82 > 79 characters)
+./hovercraft/__init__.py:432:80: E501 line too long (85 > 79 characters)
+./hovercraft/generate.py:8:1: F811 redefinition of unused 'html' from line 4
+./hovercraft/generate.py:28:80: E501 line too long (87 > 79 characters)
+./hovercraft/generate.py:79:80: E501 line too long (82 > 79 characters)
+./hovercraft/generate.py:86:80: E501 line too long (82 > 79 characters)
+./hovercraft/generate.py:111:80: E501 line too long (80 > 79 characters)
+./hovercraft/generate.py:115:80: E501 line too long (85 > 79 characters)
+./hovercraft/generate.py:132:80: E501 line too long (81 > 79 characters)
+./hovercraft/generate.py:136:80: E501 line too long (81 > 79 characters)
+./hovercraft/generate.py:140:80: E501 line too long (81 > 79 characters)
+./hovercraft/generate.py:175:80: E501 line too long (84 > 79 characters)
+./hovercraft/generate.py:184:80: E501 line too long (87 > 79 characters)
+./hovercraft/generate.py:216:80: E501 line too long (81 > 79 characters)
+./hovercraft/generate.py:287:80: E501 line too long (80 > 79 characters)
+./hovercraft/generate.py:288:80: E501 line too long (88 > 79 characters)
+./hovercraft/generate.py:289:80: E501 line too long (82 > 79 characters)
+./hovercraft/generate.py:298:80: E501 line too long (87 > 79 characters)
+./hovercraft/generate.py:302:80: E501 line too long (87 > 79 characters)
+./hovercraft/generate.py:326:37: W291 trailing whitespace
+./hovercraft/generate.py:381:80: E501 line too long (81 > 79 characters)
+./hovercraft/generate.py:444:80: E501 line too long (80 > 79 characters)
+./hovercraft/generate.py:445:80: E501 line too long (88 > 79 characters)
+./hovercraft/generate.py:446:80: E501 line too long (82 > 79 characters)
+./hovercraft/generate.py:455:80: E501 line too long (87 > 79 characters)
+./hovercraft/generate.py:459:80: E501 line too long (87 > 79 characters)
+./hovercraft/parse.py:87:80: E501 line too long (84 > 79 characters)
+./hovercraft/parse.py:177:80: E501 line too long (83 > 79 characters)
+./hovercraft/position.py:5:80: E501 line too long (85 > 79 characters)
+./hovercraft/position.py:62:80: E501 line too long (80 > 79 characters)
+./hovercraft/position.py:136:42: E203 whitespace before ':'
+./hovercraft/position.py:262:80: E501 line too long (88 > 79 characters)
+./hovercraft/template.py:87:80: E501 line too long (87 > 79 characters)
+./hovercraft/template.py:106:80: E501 line too long (88 > 79 characters)
+./hovercraft/template.py:113:80: E501 line too long (85 > 79 characters)
+./hovercraft/template.py:137:80: E501 line too long (88 > 79 characters)
+./hovercraft/template.py:142:80: E501 line too long (84 > 79 characters)
+./hovercraft/template.py:150:80: E501 line too long (83 > 79 characters)
+./hovercraft/template.py:187:66: E203 whitespace before ':'
+./hovercraft/template.py:188:80: E501 line too long (83 > 79 characters)
+./hovercraft/template.py:232:80: E501 line too long (87 > 79 characters)
+./tests/test_data/__init__.py:43:80: E501 line too long (89 > 79 characters)
+./tests/test_data/__init__.py:71:80: E501 line too long (89 > 79 characters)
+./tests/test_data/__init__.py:123:80: E501 line too long (89 > 79 characters)
+./tests/test_data/__init__.py:179:80: E501 line too long (89 > 79 characters)
+./tests/test_generator.py:23:80: E501 line too long (80 > 79 characters)
+./tests/test_generator.py:28:80: E501 line too long (87 > 79 characters)
+./tests/test_generator.py:34:80: E501 line too long (85 > 79 characters)
+./tests/test_generator.py:45:80: E501 line too long (83 > 79 characters)
+./tests/test_generator.py:60:80: E501 line too long (81 > 79 characters)
+./tests/test_hovercraft.py:30:80: E501 line too long (84 > 79 characters)
+./tests/test_hovercraft.py:81:80: E501 line too long (88 > 79 characters)
+./tests/test_hovercraft.py:138:80: E501 line too long (80 > 79 characters)
+./tests/test_hovercraft.py:168:80: E501 line too long (86 > 79 characters)
+./tests/test_hovercraft.py:189:80: E501 line too long (80 > 79 characters)
+./tests/test_hovercraft.py:217:80: E501 line too long (82 > 79 characters)
+./tests/test_hovercraft.py:222:80: E501 line too long (84 > 79 characters)
+./tests/test_hovercraft.py:225:80: E501 line too long (81 > 79 characters)
+./tests/test_hovercraft.py:257:80: E501 line too long (83 > 79 characters)
+./tests/test_hovercraft.py:285:80: E501 line too long (101 > 79 characters)
+./tests/test_hovercraft.py:288:80: E501 line too long (86 > 79 characters)
+./tests/test_parse.py:16:80: E501 line too long (88 > 79 characters)
+./tests/test_parse.py:23:80: E501 line too long (94 > 79 characters)
+./tests/test_parse.py:24:80: E501 line too long (84 > 79 characters)
+./tests/test_parse.py:25:80: E501 line too long (82 > 79 characters)
+./tests/test_parse.py:26:80: E501 line too long (80 > 79 characters)
+./tests/test_parse.py:27:80: E501 line too long (86 > 79 characters)
+./tests/test_parse.py:28:80: E501 line too long (99 > 79 characters)
+./tests/test_parse.py:40:80: E501 line too long (88 > 79 characters)
+./tests/test_parse.py:42:80: E501 line too long (80 > 79 characters)
+./tests/test_parse.py:43:80: E501 line too long (82 > 79 characters)
+./tests/test_parse.py:44:80: E501 line too long (81 > 79 characters)
+./tests/test_parse.py:45:80: E501 line too long (86 > 79 characters)
+./tests/test_parse.py:50:80: E501 line too long (80 > 79 characters)
+./tests/test_parse.py:52:80: E501 line too long (82 > 79 characters)
+./tests/test_parse.py:70:80: E501 line too long (92 > 79 characters)
+./tests/test_parse.py:72:80: E501 line too long (82 > 79 characters)
+./tests/test_parse.py:73:80: E501 line too long (93 > 79 characters)
+./tests/test_parse.py:74:80: E501 line too long (80 > 79 characters)
+./tests/test_parse.py:86:80: E501 line too long (84 > 79 characters)
+./tests/test_parse.py:87:80: E501 line too long (84 > 79 characters)
+./tests/test_parse.py:88:80: E501 line too long (85 > 79 characters)
+./tests/test_parse.py:89:80: E501 line too long (85 > 79 characters)
+./tests/test_parse.py:90:80: E501 line too long (84 > 79 characters)
+./tests/test_parse.py:91:80: E501 line too long (85 > 79 characters)
+./tests/test_parse.py:92:80: E501 line too long (81 > 79 characters)
+./tests/test_parse.py:93:80: E501 line too long (84 > 79 characters)
+./tests/test_parse.py:99:80: E501 line too long (83 > 79 characters)
+./tests/test_parse.py:101:80: E501 line too long (83 > 79 characters)
+./tests/test_parse.py:102:80: E501 line too long (81 > 79 characters)
+./tests/test_parse.py:110:80: E501 line too long (81 > 79 characters)
+./tests/test_parse.py:116:80: E501 line too long (83 > 79 characters)
+./tests/test_parse.py:122:80: E501 line too long (80 > 79 characters)
+./tests/test_parse.py:123:80: E501 line too long (80 > 79 characters)
+./tests/test_parse.py:124:80: E501 line too long (80 > 79 characters)
+./tests/test_parse.py:125:80: E501 line too long (80 > 79 characters)
+./tests/test_parse.py:126:80: E501 line too long (80 > 79 characters)
+./tests/test_parse.py:127:80: E501 line too long (80 > 79 characters)
+./tests/test_parse.py:128:80: E501 line too long (80 > 79 characters)
+./tests/test_parse.py:139:80: E501 line too long (93 > 79 characters)
+./tests/test_parse.py:140:80: E501 line too long (86 > 79 characters)
+./tests/test_parse.py:141:80: E501 line too long (86 > 79 characters)
+./tests/test_parse.py:142:80: E501 line too long (93 > 79 characters)
+./tests/test_parse.py:143:80: E501 line too long (93 > 79 characters)
+./tests/test_parse.py:144:80: E501 line too long (93 > 79 characters)
+./tests/test_parse.py:145:80: E501 line too long (88 > 79 characters)
+./tests/test_position.py:7:80: E501 line too long (86 > 79 characters)
+./tests/test_position.py:690:80: E501 line too long (82 > 79 characters)
+./tests/test_position.py:711:80: E501 line too long (83 > 79 characters)
+./tests/test_position.py:867:80: E501 line too long (91 > 79 characters)
+./tests/test_template.py:22:80: E501 line too long (85 > 79 characters)
+./tests/test_template.py:30:80: E501 line too long (87 > 79 characters)
+./tests/test_template.py:46:80: E501 line too long (87 > 79 characters)
+./tests/test_template.py:60:80: E501 line too long (88 > 79 characters)
+./tests/test_template.py:80:80: E501 line too long (87 > 79 characters)
+./tests/test_template.py:81:80: E501 line too long (84 > 79 characters)
+./tests/test_template.py:84:80: E501 line too long (82 > 79 characters)
+./tests/test_template.py:99:80: E501 line too long (80 > 79 characters)
+./tests/test_template.py:114:80: E501 line too long (81 > 79 characters)
+./tests/test_template.py:116:80: E501 line too long (82 > 79 characters)
+Error: Process completed with exit code 1.
+
 Hovercraft Changes
 ==================
 2.8 (unreleased)

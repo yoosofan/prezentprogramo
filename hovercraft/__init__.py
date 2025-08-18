@@ -5,13 +5,13 @@ import threading
 import time
 
 # import pkg_resources
-from importlib.metadata import version, PackageNotFoundError
+from importlib.metadata import version  # , PackageNotFoundError
 from packaging.requirements import Requirement
 from packaging.version import parse as parse_version
 
 from collections import defaultdict
 from http.server import HTTPServer, SimpleHTTPRequestHandler
-from tempfile import TemporaryDirectory
+# from tempfile import TemporaryDirectory
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 from docutils import nodes

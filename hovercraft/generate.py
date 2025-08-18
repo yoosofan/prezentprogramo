@@ -5,7 +5,6 @@ from lxml import etree, html
 
 # from pkg_resources import resource_string
 import importlib.resources
-from lxml import html
 from pyhtml2pdf import converter
 from screeninfo import get_monitors
 from .parse import rst2xml, SlideMaker
@@ -323,7 +322,7 @@ def prepare_for_pdf(html_file_path):
             .pdfContainer
             {
                 justify-content: center;
-                align-items: center; 
+                align-items: center;
                 display: flex;
                 width: 100%;
                 height: 100%;
