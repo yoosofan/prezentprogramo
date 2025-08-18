@@ -4,7 +4,7 @@ import os
 import threading
 import time
 
-#import pkg_resources
+# import pkg_resources
 from importlib.metadata import version, PackageNotFoundError
 from packaging.requirements import Requirement
 from packaging.version import parse as parse_version
@@ -62,13 +62,13 @@ class YoGraphvizDirective(Directive):
             # Increment the count for each instance
             self.__class__.count += 1
 
-            graph_filename = 'yoo_graphviz_'
-            graph_filename += hashlib.md5(graphviz_code.encode('utf-8')).hexdigest()
-                      
+            graph_filename = "yoo_graphviz_"
+            graph_filename += hashlib.md5(graphviz_code.encode("utf-8")).hexdigest()
+
             graph_path = os.path.join(graphs_directory, graph_filename)
-            
+
             if not os.path.exists(graph_path):
-              dot.render(filename=graph_path, cleanup=True, format="png", quiet=True)
+                dot.render(filename=graph_path, cleanup=True, format="png", quiet=True)
             relative_image_path = os.path.relpath(graph_path, rst_directory)
 
             if not relative_image_path.endswith(".png"):
@@ -204,11 +204,14 @@ def generate_and_observe(args, event):
         observer.stop()
         observer.join()
 
-def yoo_run_browser(bind: str, port:int):
+
+def yoo_run_browser(bind: str, port: int):
     time.sleep(0.1)
     import webbrowser
-    webbrowser.open_new('http://'+bind+':'+str(port))
-    
+
+    webbrowser.open_new("http://" + bind + ":" + str(port))
+
+
 def main(args=None):
     parser = create_arg_parser()
     args = parser.parse_args(args=args)
@@ -217,7 +220,7 @@ def main(args=None):
         generate_pdf(args)
     else:
         serve_presentation(args)
-    
+
 
 def create_arg_parser():
     # That the argparse default strings are lowercase is ugly.
@@ -392,7 +395,13 @@ def serve_presentation(args):
             server = HTTPServer((bind, port), SimpleHTTPRequestHandler)
             print("Serving HTTP on", bind, "port", port, "...")
 
-            th1 = threading.Thread(target=yoo_run_browser, args=(bind, port,))
+            th1 = threading.Thread(
+                target=yoo_run_browser,
+                args=(
+                    bind,
+                    port,
+                ),
+            )
 
             try:
                 # Now generate the presentation

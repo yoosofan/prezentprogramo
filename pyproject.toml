@@ -3,7 +3,7 @@
 
 [project]
 name = "Bildumilo"
-version = "1.0.1"
+version = "3.1"
 authors = [
   { name="Ahmad Yoosofan", email="yoosofan@gmx.com" },
 ]
@@ -11,7 +11,7 @@ description = "Makes impress.js presentations from reStructuredText"
 # description = "Another text based (rst) presentation tool"
 
 readme = "README.rst"
-requires-python = ">=3.7"
+requires-python = ">=3.10"
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
@@ -19,7 +19,6 @@ classifiers = [
     "Topic :: Multimedia :: Graphics :: Presentation",
     "Topic :: Text Processing",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.7.1",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
@@ -32,7 +31,7 @@ keywords = ["presentations", "restructuredtext"]
 
 dependencies = [
     "wheel",
-    "docutils >= 0.19",
+    "docutils >= 0.21",
     "lxml>=3.1.0",
     "svg.path",
     "pygments",
