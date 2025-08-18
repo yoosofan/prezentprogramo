@@ -68,8 +68,10 @@ class TemplateInfoTests(unittest.TestCase):
         js_headers = [
             each.filepath
             for each in template_info.resources
-            if (each.resource_type == JS_RESOURCE
-                and each.extra_info == JS_POSITION_HEADER)
+            if (
+                each.resource_type == JS_RESOURCE
+                and each.extra_info == JS_POSITION_HEADER
+            )
         ]
         self.assertIn("js/dummy.js", js_headers)
 

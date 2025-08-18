@@ -58,8 +58,8 @@ def gather_positions(
                 pos["data-x"] = "r%s" % default_movement_from_args
             else:
                 if (
-                    default_movement_from_data_width and int(
-                        default_movement_from_data_width) > DEFAULT_MOVEMENT
+                    default_movement_from_data_width
+                    and int(default_movement_from_data_width) > DEFAULT_MOVEMENT
                 ):
                     pos["data-x"] = "r%s" % default_movement_from_data_width
                 else:
@@ -133,7 +133,7 @@ def _update_position(pos1, pos2):
             plus = val.find("+")
             minus = val.find("-")
             if plus > -1:
-                newval = num(val[plus + 1:])
+                newval = num(val[plus + 1 :])
                 pos1[key + "-rel"] = val[0:plus]
             elif minus > -1 and not val.startswith("r-"):
                 newval = num(val[minus:])

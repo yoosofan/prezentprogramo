@@ -25,6 +25,10 @@ function install_uv_python(){
     
     source ~/install/uv13.6
     
+    uv tool install black
+    black . --check
+    black .
+     
     uv tool install ruff@latest
     
     ruff check
