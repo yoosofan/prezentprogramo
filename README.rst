@@ -20,6 +20,101 @@ documentation subdirectory.
 
 Installation
 ------------
+Simple but not the best way to install
+
+.. code:: sh
+
+    pip3 install prezentprogramo
+
+It is better to follow the following steps instead because 
+there will be less problems in the long run.
+
+Prepare Environment
+^^^^^^^^^^^^^^^^^^^
+These steps can be done once. You don't need to repeat them unless you really need to.
+
+`uv <https://github.com/astral-sh/uv>`_ is a Python package and project manager.
+Using uv has multiple benefits including installing any version of python3 and
+related packages on it. uv can reduce many conflicts and problems you may face if you use pip alone.
+While it is not necessary but I would recommend to use it instead of pip.
+
+#. Install the latest python3 
+    #. uv 
+
+        .. code:: sh
+        
+            # First install curl from
+            # https://curl.se/download.html
+            # Instead on any debian based linux use the following command
+            # apt install curl
+
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            
+            # update uv periodically
+            
+            uv self update
+            
+      #. Install python3
+      
+          .. code:: sh
+          
+              uv python install 3.13.6
+
+#. It is better to use virtual environment in python3
+    #. Create virtual environment
+
+        #. Using uv
+        
+            .. code:: sh
+            
+                uv venv --python 3.13.6 myvenv 
+    
+        #. Pure python
+        
+            .. code:: sh
+
+                python -m venv myvenv
+                            
+    #. Activate virtual environment whenever you want to use prezentprogramo
+    
+        .. code:: sh
+
+            source myvenv/bin/activate
+
+Install Prezentprogramo
+^^^^^^^^^^^^^^^^^^^^^^^
+#. Use the latest changes in github repository
+
+    #. Download `Prezentprogramo <https://github.com/yoosofan/prezentprogramo>`_ repository to a directory, like :code:`~/path/prezentprogramo`
+    #. Install Prezentprogramo by
+    
+        #. uv
+          
+            .. code:: sh
+            
+                uv tool install ~/path/prezentprogramo/
+
+        #. Or pip
+        
+            .. code:: sh
+
+                pip install ~/path/prezentprogramo/
+
+#. Or use pypi.org
+
+    #. uv
+        
+        .. code:: sh
+        
+            uv tool install prezentprogramo
+            
+    #. Or pip
+    
+        .. code:: sh
+        
+            pip3 install prezentprogramo
+            
+
 Prezentprogramo requires Python 3 and can be installed like any Python package.
 
 It is better to use virtual environment::
@@ -44,6 +139,13 @@ Or download the code in a directory let's name it `~/path/prezentprogramo/` then
 Use prezentprogramo::
 
     $ prezentprogramo prezentprogramo/docs/examples/tutorial.rst
+
+It will automatically open browser if it is possible.
+If the browser did not open then run your browser
+and type the following link in your browser
+
+Prezentprogramo create a folder by the name of the specified rst file. 
+Therefore, using the same name for folders and rst file creates conflicts.
 
 Then you can deactivate virtual environment::
 
