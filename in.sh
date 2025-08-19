@@ -1,16 +1,16 @@
 function old11(){
   
-    pip3 uninstall bildumilo -y
+    pip3 uninstall prezentprogramo -y
 
-    rsync -av --delete ~/research/projects/bildumilo/ ~/temp/bildumilo/
+    rsync -av --delete ~/research/projects/prezentprogramo/ ~/temp/prezentprogramo/
 
-    pip3 install ~/temp/bildumilo/
+    pip3 install ~/temp/prezentprogramo/
 
     cd ~/research/projects/slide/cm/
 
     #rm -rf rd/
 
-    bildumilo rd.rst 
+    prezentprogramo rd.rst 
 }
 # ------------
 
@@ -48,9 +48,9 @@ function install_uv_python(){
 }
 
 
-rsync -av --delete ~/research/projects/bildumilo/ ~/temp/bildo/
-uv tool uninstall bildumilo
-uv cache clean bildumilo
-uv tool install ~/temp/bildo/
+rsync -av --delete ~/research/projects/prezentprogramo/ ~/temp/prezent/
+uv tool uninstall prezentprogramo
+uv cache clean prezentprogramo
+uv tool install ~/temp/prezent/
 cd ~/research/projects/slide/os/
-bildumilo vm.rst 
+prezentprogramo vm.rst 

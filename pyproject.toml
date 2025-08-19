@@ -2,7 +2,7 @@
 # https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#writing-pyproject-toml
 
 [project]
-name = "Bildumilo"
+name = "Prezentprogramo"
 version = "3.1"
 authors = [
   { name="Ahmad Yoosofan", email="yoosofan@gmx.com" },
@@ -44,8 +44,8 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/yoosofan/bildumilo"
-Issues = "https://github.com/yoosofan/bildumilo/issues"
+Homepage = "https://github.com/yoosofan/prezentprogramo"
+Issues = "https://github.com/yoosofan/prezentprogramo/issues"
 
 [project.optional-dependencies]
 test = [
@@ -57,10 +57,10 @@ testing = ["manuel"]
 
 
 [project.entry-points."hovercraft.main"]
-bildumilo = "hovercraft:main"
+prezentprogramo = "hovercraft:main"
 
 [project.scripts]
-bildumilo = "hovercraft:main"
+prezentprogramo = "hovercraft:main"
 
 #[tool.setuptools]
 #include-package-data = true

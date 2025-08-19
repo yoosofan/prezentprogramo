@@ -1,6 +1,6 @@
-Bildumilo
-=========
-Bildumilo is a tool to make impress.js_ presentations from
+Prezentprogramo
+===============
+Prezentprogramo is a tool to make impress.js_ presentations from
 reStructuredText. For a quick explanation, see the demo_.
 
 Based on `Hovercraft! <https://github.com/regebro/hovercraft>`_
@@ -20,7 +20,7 @@ documentation subdirectory.
 
 Installation
 ------------
-Bildumilo requires Python 3 and can be installed like any Python package.
+Prezentprogramo requires Python 3 and can be installed like any Python package.
 
 It is better to use virtual environment::
 
@@ -28,22 +28,22 @@ It is better to use virtual environment::
     $ python -m venv myvenv
     $ source myvenv/bin/activate
 
-The easiest way to install bildumilo is by using pip_ and git, then run::
+The easiest way to install prezentprogramo is by using pip_ and git, then run::
 
-    $ pip3 install git+https://github.com/yoosofan/bildumilo
+    $ pip3 install git+https://github.com/yoosofan/prezentprogramo
     
-Or download the code in a directory let's name it `~/path/bildumilo/` then::
+Or download the code in a directory let's name it `~/path/prezentprogramo/` then::
     
-    $ pip3 install ~/path/bildumilo/
+    $ pip3 install ~/path/prezentprogramo/
     
     or
     
-    $ python3 -m pip install ~/path/bildumilo/
+    $ python3 -m pip install ~/path/prezentprogramo/
 
 
-Use bildumilo::
+Use prezentprogramo::
 
-    $ bildumilo bildumilo/docs/examples/tutorial.rst
+    $ prezentprogramo prezentprogramo/docs/examples/tutorial.rst
 
 Then you can deactivate virtual environment::
 
@@ -60,7 +60,7 @@ Hovercraft is untested on Windows, but there is no reason it shouldn't work, at 
 
 TODO
 ----
-* Copy MathJax fonts bildumilo/hovercraft/templates/default/js/MathJax/es5/output/chtml/fonts/woff-v2
+* Copy MathJax fonts prezentprogramo/hovercraft/templates/default/js/MathJax/es5/output/chtml/fonts/woff-v2
 * Remove extra files:
     * Prevent making extra grap_ii.png for changing yographviz
         * G.draw("test.svg", prog= 'dot', format='svg:cairo') 

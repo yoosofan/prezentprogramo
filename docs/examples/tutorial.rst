@@ -1,6 +1,6 @@
 :title: Slideshow Tutorial
 :author: Lennart Regebro
-:description: The Bildumilo! tutorial.
+:description: The Prezentprogramo! tutorial.
 :keywords: presentation, restructuredtext, impress.js, tutorial
 :css: tutorial.css
 
@@ -10,10 +10,10 @@
 
 .. footer::
 
-   Bildumilo! Tutorial, https://hovercraft.readthedocs.io
+   Prezentprogramo! Tutorial, https://hovercraft.readthedocs.io
 
-This slide show is a sort of tutorial of how to use Bildumilo! to make
-presentations. It will show the most important features of Bildumilo! with
+This slide show is a sort of tutorial of how to use Prezentprogramo! to make
+presentations. It will show the most important features of Prezentprogramo! with
 explanations.
 
 Hopefully you ended up here by the link from the official documentation at
@@ -28,7 +28,7 @@ links to the source code in the Examples section.
 
 You can render this presentation to HTML with the command::
 
-    bildumilo tutorial.rst outdir
+    prezentprogramo tutorial.rst outdir
 
 And then view the outdir/index.html file to see how it turned out.
 
@@ -36,7 +36,7 @@ And then view the outdir/index.html file to see how it turned out.
 
 The first thing to note is the special syntax for information about the
 presentation that you see above. This is in reStructuredText called "fields"
-and it's used all the time in Bildumilo! to change attributes and set data
+and it's used all the time in Prezentprogramo! to change attributes and set data
 on the presentation, on slides and on images. The order of the fields is not
 important, but you can only have one of each field.
 
@@ -47,7 +47,7 @@ presentation yourself in a meeting you can skip all of it.
 
 The title set is the title that is going to be shown in the title bar of the
 browser. reStructuredText also has a separate syntax for titles that is also
-supported by Bildumilo::
+supported by Prezentprogramo::
 
     .. title:: Slideshow Tutorial
 
@@ -116,7 +116,7 @@ If you do you get an error::
 Other formatting
 ================
 
-All the normal reStructuredText functions are supported in Bildumilo!
+All the normal reStructuredText functions are supported in Prezentprogramo!
 
 - Such as bulletlists, which start with a dash (-) or an asterisk (*).
   You can have many lines of text in one bullet if you indent the
@@ -162,7 +162,7 @@ And you can optionally set width and height:
     :height: 130px
 
 Some people like to have slideshows containing only illustrative images. This
-works fine with Bildumilo! as well, as you can see on the next slide.
+works fine with Prezentprogramo! as well, as you can see on the next slide.
 
 ----
 
@@ -173,7 +173,7 @@ works fine with Bildumilo! as well, as you can see on the next slide.
 Slides can have presenter notes!
 ================================
 
-This is the killer-feature of Bildumilo! as very few other tools like this
+This is the killer-feature of Prezentprogramo! as very few other tools like this
 support a presenter console. You add presenter notes in the slide like this:
 
 .. note::
@@ -307,6 +307,6 @@ And inline: :math:`S = k \log W`
 That's all folks!
 =================
 
-That finishes the basic tutorial for Bildumilo! Next you probably want to
+That finishes the basic tutorial for Prezentprogramo! Next you probably want to
 take a look at the positioning tutorial, so you can use the pan, rotate and
 zoom functionality.

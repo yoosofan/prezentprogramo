@@ -1,7 +1,7 @@
-.. Bildumilo! documentation master file.
+.. Prezentprogramo! documentation master file.
 
-Bildumilo! - Merging convenience and cool!
-===========================================
+Prezentprogramo! - Merging convenience and cool!
+================================================
 
 Contents:
 

@@ -1,6 +1,6 @@
 Contributors
 ------------
-Bildumilo was written by Ahmad Yoosofan <yoosofan@gmx.com> and his students listed below, and is licensed with GPLv3 based on Hovercraft.
+Prezentprogramo was written by Ahmad Yoosofan <yoosofan@gmx.com> and his students listed below, and is licensed with GPLv3 based on Hovercraft.
 
 * `Meisam HakimiNia <https://t.me/meisamhakimi>`_
 * `Hamid Akhtari <https://t.me/HamidAkhtari>`_

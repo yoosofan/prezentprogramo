@@ -8,11 +8,11 @@ Traditionally a presentation is made up of slides. Calling them "slides" is
 not really relevant in an impress.js context, as they can overlap and doesn't
 necessarily slide. The name "steps" is better, but it's also more ambiguous.
 Hence impress.js uses the terms "slide" and "step" as meaning the same thing,
-and so does bildumilo.
+and so does prezentprogramo.
 
 
-Bildumilo syntax
-------------------
+Prezentprogramo syntax
+----------------------
 
 Presentations are reStructuredText files. If you are reading this
 documentation from the source code, then you are looking at a
@@ -167,7 +167,7 @@ You can also add one extra CSS-file via a command-line parameter:
 
 .. code-block:: console
 
-    bildumilo --css=my_extra.css presentationfile.rst outdir/
+    prezentprogramo --css=my_extra.css presentationfile.rst outdir/
 
 
 Styling the console
@@ -198,7 +198,7 @@ You can also add one extra Javascript-file via a command-line parameter:
 
 .. code-block:: console
 
-    bildumilo --js=my_extra.js presentationfile.rst outdir/
+    prezentprogramo --js=my_extra.js presentationfile.rst outdir/
 
 
 Adding Headers and Footers
@@ -266,7 +266,7 @@ Adding a custom directive
 -------------------------
 
 If you want to use a `custom docutils directive`_, you'll want to run
-bildumilo in the same process where you register your directive. For example,
+prezentprogramo in the same process where you register your directive. For example,
 you can create a custom startup script like the following:
 
 .. code:: python
@@ -303,7 +303,7 @@ above script:
 Portable presentations
 ----------------------
 
-Since bildumilo! generates HTML5 presentations, you can use any computer
+Since prezentprogramo! generates HTML5 presentations, you can use any computer
 that has a modern browser installed to view or show the presentation. This
 allows you both to put up the presentation online and to use a borrowed
 computer for your conference or customer presentation.
@@ -320,7 +320,7 @@ different browsers and different computers. But the latter can be unfeasible,
 not everyone has both Windows, Linux and OS X computers at home. To help make
 your presentations portable it is a good idea to define your own @font-face's
 and use them, so you are sure that the target browser will use the same fonts
-as you do. Bildumilo! will automatically find @font-face definitions and
+as you do. Prezentprogramo! will automatically find @font-face definitions and
 copy the font files to the target directory.
 
 
@@ -367,10 +367,10 @@ current version, are the following:
   useful.
 
 
-Bildumilo! specialties
------------------------
+Prezentprogramo! specialties
+----------------------------
 
-Bildumilo! has some specific ways it uses reStructuredText. First of all, the
+Prezentprogramo! has some specific ways it uses reStructuredText. First of all, the
 reStructuredText "transition" is used to mark the separation between
 different slides or steps. A transition is simply a line with four or more
 dashes::
@@ -384,7 +384,7 @@ way you can make a hierarchical presentation with multiple "levels" of steps.
 However, impress.js does not support that, so this is only useful
 if you make your own templates that uses another Javascript library, for
 example Reveal.js_. If you have more than one transition level with
-the templates included with Bildumilo, the resulting presentation may
+the templates included with Prezentprogramo, the resulting presentation may
 behave strangely.
 
 All reStructuredText fields are converted into attributes on the current tag.
@@ -400,9 +400,9 @@ the main impress.js ``<div>``. The only ones that Hovercraft! will use are
 Any fields you put first in a slide will be rendered into attributes on the
 slide ``<div>``. This is used primarily to set the position/zoom/rotation of
 the slide, either with the ``data-x``, ``data-y`` and other impress.js
-settings, or the ``bildumilo-path`` setting, more on that later.
+settings, or the ``prezentprogramo-path`` setting, more on that later.
 
-Bildumilo! will start making the first slide when it first encounters either
+Prezentprogramo! will start making the first slide when it first encounters either
 a transition or a header. Everything that comes before that will belong to the
 presentation as a whole.
 
@@ -443,7 +443,7 @@ Showing lists item by item
 
 A common feature in presentation software is to have a list that appears item
 by item. This is called "substeps" and is enabled by setting the ``substep``
-class on the items to be shown. In Bildumilo! the easiest was to do this is
+class on the items to be shown. In Prezentprogramo! the easiest was to do this is
 to use paragraphs, since you can set the class on multiple paragraphs at once::
 
     .. class:: substep
@@ -500,7 +500,7 @@ on the first item of a list, it will always be shown from the start::
 Mathematical equations
 ......................
 
-If you add a ``math`` directive then Bildumilo! will add a link to the MathJax_ CDN
+If you add a ``math`` directive then Prezentprogramo! will add a link to the MathJax_ CDN
 so that this::
 
     .. math:: e^{i \pi} + 1 = 0
@@ -520,7 +520,7 @@ command line.
 Relative positioning
 --------------------
 
-Bildumilo! gives you the ability to position slides relative to each other.
+Prezentprogramo! gives you the ability to position slides relative to each other.
 You do this by starting the coordinates with "r". This will position the
 slide 500 pixels to the right and a thousand pixels above the previous slide::
 
@@ -548,13 +548,13 @@ slides will simply slide from right to left.
 SVG Paths
 ---------
 
-Bildumilo! supports positioning slides along an SVG path. This is handy, as
+Prezentprogramo! supports positioning slides along an SVG path. This is handy, as
 you can create a drawing in a software that supports SVG, and then copy-paste
 that drawings path into your presentation.
 
-You specify the SVG path with the ``:bildumilo-path:`` field. For example::
+You specify the SVG path with the ``:prezentprogramo-path:`` field. For example::
 
-    :bildumilo-path: m275,175 v-150 a150,150 0 0,0 -150,150 z
+    :prezentprogramo-path: m275,175 v-150 a150,150 0 0,0 -150,150 z
 
 Every following slide that does not have any explicit positioning will be
 placed on this path.
@@ -565,7 +565,7 @@ Relative and absolute coordinates
 .................................
 
 SVG coordinates can either be absolute, with a reference to the page
-origin; or relative, which is in reference to the last point. Bildumilo! can
+origin; or relative, which is in reference to the last point. Prezentprogramo! can
 handle both, but what it can not handle very well is a mixture of them.
 
 Specifically, if you take an SVG path that starts with a relative movement
@@ -596,7 +596,7 @@ ignored, but you have to include it anyway.
 SVG transforms
 ..............
 
-SVG allows you to draw up path and then transform it. Bildumilo! has no
+SVG allows you to draw up path and then transform it. Prezentprogramo! has no
 support for these transforms, so before you extract the path you should make
 sure the SVG software doesn't use transforms. In Inkscape you can do this by
 the "Simplify" command.
@@ -604,7 +604,7 @@ the "Simplify" command.
 Other SVG shapes
 ................
 
-Bildumilo! doesn't support other SVG shapes, just the path. This is because
+Prezentprogramo! doesn't support other SVG shapes, just the path. This is because
 organising slides in squares, etc, is quite simple anyway, and the shapes can
 be made into paths. Usually in the software you will have to select the shape
 and tell your software to make it into a path. In Inkscape, transforming an
@@ -615,7 +615,7 @@ command in Inkscape is usually enough to make the shapes into paths.
 Shape-scaling
 .............
 
-Bildumilo! will scale the path so that all the slides that need to fit into
+Prezentprogramo! will scale the path so that all the slides that need to fit into
 the path will fit into the path. If you therefore have several paths in your
 presentation, they will **not** keep their relative sizes, but will be
 resized so the slides fit. If you need to have the shapes keep their relative
@@ -624,14 +624,14 @@ sizes, you need to combine them into one path.
 Examples
 --------
 
-To see how to use Bildumilo! in practice, there are three example presentations
-included with Bildumilo!
+To see how to use Prezentprogramo! in practice, there are three example presentations
+included with Prezentprogramo!
 
     hovercraft.rst_
         The demo presentation you can see at http://regebro.github.io/hovercraft
 
     tutorial.rst_
-        A step by step guide to the features of Bildumilo!
+        A step by step guide to the features of Prezentprogramo!
 
     positions.rst_
         An explanation of how to use the positioning features.

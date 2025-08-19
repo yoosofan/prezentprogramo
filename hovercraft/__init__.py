@@ -23,8 +23,8 @@ from .generate import generate, generate_pdf
 
 import hashlib
 
-# __version__ = "3.0.1" #pkg_resources.require("bildumilo")[0].version
-__version__ = parse_version(version(Requirement("bildumilo").name))
+# __version__ = "3.0.1" #pkg_resources.require("prezentprogramo")[0].version
+__version__ = parse_version(version(Requirement("prezentprogramo").name))
 
 
 class YoGraphvizDirective(Directive):
@@ -247,7 +247,7 @@ def create_arg_parser():
         help=(
             "The directory where the presentation is saved. Will be created "
             "if it does not exist. If you do not specify a targetdir "
-            "bildumilo will instead start a webserver and serve the "
+            "prezentprogramo will instead start a webserver and serve the "
             "presentation from that server."
         ),
     )
@@ -337,7 +337,7 @@ def create_arg_parser():
         "--version",
         action="version",
         # help=('Display version and exit.'),
-        version="bildumilo %s" % __version__,
+        version="prezentprogramo %s" % __version__,
     )
     parser.add_argument(
         "-pdf",

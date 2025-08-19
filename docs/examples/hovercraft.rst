@@ -1,8 +1,8 @@
-:title: Bildumilo! demo
+:title: Prezentprogramo! demo
 :data-transition-duration: 1500
 :css: hovercraft.css
 
-This is a demo for Bildumilo! You can view it as a finished presentation
+This is a demo for Prezentprogramo! You can view it as a finished presentation
 at http://regebro.github.io/hovercraft/
 
 
@@ -11,7 +11,7 @@ It's also useful as an example, in which case it's supposed to be read as
 
 You can render this presentation to HTML with the command::
 
-    bildumilo hovercraft.rst outdir
+    prezentprogramo hovercraft.rst outdir
 
 And then view the outdir/index.html file to see how it turned out.
 
@@ -182,7 +182,7 @@ repositioning all the following slides!
 .. note::
 
     The endless repositioning of slides is what prompted me to write
-    Bildumilo! in the first place.
+    Prezentprogramo! in the first place.
 
 ----
 
@@ -207,8 +207,8 @@ Of course there is!
 :data-x: r-2500
 :data-y: r0
 
-Introducing **Bildumilo!**
-===========================
+Introducing **Prezentprogramo!**
+================================
 
 .. note::
 
@@ -289,8 +289,8 @@ And inline: :math:`S = k \log W`
 
 ----
 
-**Bildumilo!**
-===============
+**Prezentprogramo!**
+====================
 
 .. figure:: images/hovercraft_logo.png
 
@@ -307,12 +307,12 @@ And inline: :math:`S = k \log W`
 :data-z: 4000
 :data-rotate-x: 90
 
-**Bildumilo!**
-===============
+**Prezentprogramo!**
+====================
 
 On Github:
 
-https://github.com/yoosofan/bildumilo
+https://github.com/yoosofan/prezentprogramo
 
 .. note::
 
