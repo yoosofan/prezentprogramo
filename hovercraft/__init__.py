@@ -319,6 +319,11 @@ def create_arg_parser():
             " (It will only be used if you have rST ``math::`` in your document)"
         ),
     )
+    # parser.add_argument(
+    #     "--math_output",
+    #     default="MathML",
+    #     help=("use mathML"),
+    # )
     parser.add_argument(
         "-N",
         "--slide-numbers",
