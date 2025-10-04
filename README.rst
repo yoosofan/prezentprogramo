@@ -1,7 +1,7 @@
 Prezentprogramo
 ===============
-Prezentprogramo is a tool to make impress.js_ presentations from
-reStructuredText. For a quick explanation, see the demo_.
+Prezentprogramo is a tool to make `impress.js <https://impress.js.org>`_ presentations from
+reStructuredText. For a quick explanation, see one of my `slides <https://yoosofan.github.io/slide/os/ps>`_ or check list of them https://yoosofan.github.io/slide/
 
 Based on `Hovercraft! <https://github.com/regebro/hovercraft>`_
 
@@ -15,7 +15,7 @@ Features
 * The slide show generated is in HTML, so you only need a web browser to show it.
 * Easy sharing, as it can be put up on a website for anyone to see!
 
-Full documentation of Hovercraft is available at readthedocs.org_, and also in the
+Full documentation of Hovercraft is available at https://hovercraft.readthedocs.io/en/latest/ , and also in the
 documentation subdirectory.
 
 Installation
@@ -58,7 +58,7 @@ While it is not necessary but I would recommend to use it instead of pip.
       
           .. code:: sh
           
-              uv python install 3.13.6
+              uv python install 3.13.7
 
 #. It is better to use virtual environment in python3
     #. Create virtual environment
@@ -67,7 +67,7 @@ While it is not necessary but I would recommend to use it instead of pip.
         
             .. code:: sh
             
-                uv venv --python 3.13.6 myvenv 
+                uv venv --python 3.13.7 myvenv 
     
         #. Pure python
         
@@ -123,7 +123,7 @@ It is better to use virtual environment::
     $ python -m venv myvenv
     $ source myvenv/bin/activate
 
-The easiest way to install prezentprogramo is by using pip_ and git, then run::
+The easiest way to install prezentprogramo is by using pip and git, then run::
 
     $ pip3 install git+https://github.com/yoosofan/prezentprogramo
     

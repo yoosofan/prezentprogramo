@@ -1,6 +1,10 @@
 Prezentprogramo
 ===============
-3.1 (2025-08-16)
+3.2 (2025/10/04)
+----------------
+* Fix convert to pdf
+
+3.1 (2025/08/16)
 -----------------
 * Replace setup.cfg by pyproject.toml
 * update impress.js to fix substep

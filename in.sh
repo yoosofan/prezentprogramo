@@ -50,6 +50,8 @@ function install_uv_python(){
 
     # uv publish dist/*
     # uv publish --token <your_pypi_token>
+    
+    twine check --strict dist/*
     twine upload dist/*
 }
 
