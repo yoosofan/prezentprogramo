@@ -5,7 +5,9 @@ from lxml import etree, html
 
 # from pkg_resources import resource_string
 import importlib.resources
-from pyhtml2pdf import converter
+#from pyhtml2pdf import converter
+from .converter import convert
+
 from screeninfo import get_monitors
 from .parse import rst2xml, SlideMaker
 from .position import position_slides
@@ -461,11 +463,11 @@ def generate_pdf(args):
 
     prepare_for_pdf(indexHtmlPath)
 
-    converter.convert(
+    convert(
         f"file:///{indexHtmlPath}",
         args.pdf_output_path,
-        install_driver=False,
-        print_options={"landscape": True},
+        install_driver=True,
+        print_options={"landscape": True, "window_width": 1024, "window_height": 768,},
     )
 
     shutil.rmtree(args.targetdir)
