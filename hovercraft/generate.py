@@ -46,7 +46,7 @@ def rst2html(
         rststring = infile.read()
 
     presentation_dir = os.path.split(filepath)[0]
-
+    optionValues = {}
     # First convert reST to XML
     xml, dependencies = rst2xml(rststring, filepath)
     tree = etree.fromstring(xml)
@@ -56,11 +56,15 @@ def rst2html(
     tree = sm.walk()
 
     data_width = None
+    data_height = None
     # Pick up CSS information from the tree:
     for attrib, value in tree.attrib.items():
 
         if attrib.startswith("data-width"):
             data_width = value
+            optionValues["data-width"] = value
+        if attrib.startswith("data-height"):
+            optionValues["data-height"] = value
 
         if attrib.startswith("css"):
 
@@ -153,7 +157,7 @@ def rst2html(
     tree = transformer(tree)
     result = html.tostring(tree)
 
-    return template_info.doctype + result, dependencies
+    return template_info.doctype + result, dependencies, optionValues
 
 
 def set_step_width(tree, data_width):
@@ -219,7 +223,7 @@ def generate(args):
         source_files.add(args.js)
 
     # Make the resulting HTML
-    htmldata, dependencies = rst2html(
+    htmldata, dependencies, optionValues = rst2html(
         args.presentation,
         template_info,
         args.auto_console,
@@ -384,7 +388,7 @@ def generate_pdf(args):
         source_files.add(args.js)
 
     # Make the resulting HTML
-    htmldata, dependencies = rst2html(
+    htmldata, dependencies, optionValues = rst2html(
         args.presentation,
         template_info,
         args.auto_console,
@@ -467,7 +471,9 @@ def generate_pdf(args):
         f"file:///{indexHtmlPath}",
         args.pdf_output_path,
         install_driver=True,
-        print_options={"landscape": True, "window_width": 1024, "window_height": 768,},
+        print_options={"landscape": True, "window_width": optionValues["data-width"],
+            "window_height": optionValues["data-height"],
+        },
     )
 
     shutil.rmtree(args.targetdir)
