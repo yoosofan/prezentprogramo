@@ -26,7 +26,7 @@ Simple but not the best way to install
 
     pip3 install prezentprogramo
 
-It is better to follow the following steps instead because 
+It is better to follow the following steps instead because
 there will be less problems in the long run.
 
 Prepare Environment
@@ -38,45 +38,49 @@ Using uv has multiple benefits including installing any version of python3 and
 related packages on it. uv can reduce many conflicts and problems you may face if you use pip alone.
 While it is not necessary but I would recommend to use it instead of pip.
 
-#. Install the latest python3 
-    #. uv 
+#. Install the latest python3
+    #. uv
 
         .. code:: sh
-        
+
             # First install curl from
             # https://curl.se/download.html
             # Instead on any debian based linux use the following command
-            # apt install curl
+            apt install curl
+
+        .. code:: sh
 
             curl -LsSf https://astral.sh/uv/install.sh | sh
-            
+
+        .. code:: sh
+
             # update uv periodically
-            
+
             uv self update
-            
+
       #. Install python3
-      
+
           .. code:: sh
-          
+
               uv python install 3.13.7
 
 #. It is better to use virtual environment in python3
     #. Create virtual environment
 
         #. Using uv
-        
+
             .. code:: sh
-            
-                uv venv --python 3.13.7 myvenv 
-    
+
+                uv venv --python 3.13.7 myvenv
+
         #. Pure python
-        
+
             .. code:: sh
 
                 python -m venv myvenv
-                            
+
     #. Activate virtual environment whenever you want to use prezentprogramo
-    
+
         .. code:: sh
 
             source myvenv/bin/activate
@@ -87,15 +91,15 @@ Install Prezentprogramo
 
     #. Download `Prezentprogramo <https://github.com/yoosofan/prezentprogramo>`_ repository to a directory, like :code:`~/path/prezentprogramo`
     #. Install Prezentprogramo by
-    
+
         #. uv
-          
+
             .. code:: sh
-            
+
                 uv tool install ~/path/prezentprogramo/
 
         #. Or pip
-        
+
             .. code:: sh
 
                 pip install ~/path/prezentprogramo/
@@ -103,37 +107,22 @@ Install Prezentprogramo
 #. Or use pypi.org
 
     #. uv
-        
+
         .. code:: sh
-        
+
             uv tool install prezentprogramo
-            
+
     #. Or pip
-    
+
         .. code:: sh
-        
+
             pip3 install prezentprogramo
-            
 
-Prezentprogramo requires Python 3 and can be installed like any Python package.
+.. :
 
-It is better to use virtual environment::
+    The easiest way to install prezentprogramo is by using pip and git, then run::
 
-    $ cd ~/virtual_environment/path/
-    $ python -m venv myvenv
-    $ source myvenv/bin/activate
-
-The easiest way to install prezentprogramo is by using pip and git, then run::
-
-    $ pip3 install git+https://github.com/yoosofan/prezentprogramo
-    
-Or download the code in a directory let's name it `~/path/prezentprogramo/` then::
-    
-    $ pip3 install ~/path/prezentprogramo/
-    
-    or
-    
-    $ python3 -m pip install ~/path/prezentprogramo/
+        $ pip3 install git+https://github.com/yoosofan/prezentprogramo
 
 Use prezentprogramo::
 
@@ -147,7 +136,7 @@ Then you can deactivate virtual environment::
 
     $ deactivate
 
-Prezentprogramo creates a directory by the name of slide if it possible. 
+Prezentprogramo creates a directory by the name of slide if it possible.
 However, Ii is possible to create a seperate directory too.
 For Example you can use my `computer courses slide <https://github.com/yoosofan/slide>_`
 to test it
@@ -167,7 +156,7 @@ Install google-chrome
 
 Old methods for hovercraft
 --------------------------
-Run hovercraft 
+Run hovercraft
 ^^^^^^^^^^^^^^^
 .. code:: sh
 
