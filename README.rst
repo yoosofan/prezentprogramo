@@ -54,15 +54,13 @@ While it is not necessary but I would recommend to use it instead of pip.
 
         .. code:: sh
 
-            # update uv periodically
-
-            uv self update
+            uv self update # update uv periodically
 
       #. Install python3
 
           .. code:: sh
 
-              uv python install 3.13.7
+              uv python install 3.14
 
 #. It is better to use virtual environment in python3
     #. Create virtual environment
@@ -71,7 +69,7 @@ While it is not necessary but I would recommend to use it instead of pip.
 
             .. code:: sh
 
-                uv venv --python 3.13.7 myvenv
+                uv venv --python 3.14 myvenv
 
         #. Pure python
 
@@ -87,23 +85,6 @@ While it is not necessary but I would recommend to use it instead of pip.
 
 Install Prezentprogramo
 ^^^^^^^^^^^^^^^^^^^^^^^
-#. Use the latest changes in github repository
-
-    #. Download `Prezentprogramo <https://github.com/yoosofan/prezentprogramo>`_ repository to a directory, like :code:`~/path/prezentprogramo`
-    #. Install Prezentprogramo by
-
-        #. uv
-
-            .. code:: sh
-
-                uv tool install ~/path/prezentprogramo/
-
-        #. Or pip
-
-            .. code:: sh
-
-                pip install ~/path/prezentprogramo/
-
 #. Or use pypi.org
 
     #. uv
@@ -118,12 +99,8 @@ Install Prezentprogramo
 
             pip3 install prezentprogramo
 
-.. :
-
-    The easiest way to install prezentprogramo is by using pip and git, then run::
-
-        $ pip3 install git+https://github.com/yoosofan/prezentprogramo
-
+Usage
+-----
 Use prezentprogramo::
 
     $ prezentprogramo prezentprogramo/docs/examples/tutorial.rst
@@ -147,7 +124,7 @@ to test it
   prezentprogramo cpu.rst cpu_htmls/
 
 Convert to pdf
-=================
+-----------------
 Install google-chrome
 
 .. code:: sh

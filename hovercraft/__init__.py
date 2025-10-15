@@ -302,7 +302,7 @@ def create_arg_parser():
     parser.add_argument(
         "-p",
         "--port",
-        default="0.0.0.0:8000",
+        default="127.0.0.1:8000",
         help=(
             "The address and port that the server uses. "
             "Ex 8080 or 127.0.0.1:9000. Defaults to 0.0.0.0:8000."
@@ -392,7 +392,7 @@ def serve_presentation(args):
             if ":" in args.port:
                 bind, port = args.port.split(":")
             else:
-                bind, port = "0.0.0.0", args.port
+                bind, port = "127.0.0.1", args.port
             port = int(port)
 
             # First create the server. This checks that we can connect to
