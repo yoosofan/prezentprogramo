@@ -36,7 +36,7 @@ At first, install `curl <https://curl.se/download.html>`_
 
 .. code:: sh
 
-	curl -LsSf https://astral.sh/uv/install.sh | sh
+    curl -LsSf https://astral.sh/uv/install.sh | sh
     uv python install 3.14
     uv venv --python 3.14 myvenv
     source myvenv/bin/activate
@@ -55,7 +55,7 @@ and type the following link in your browser
 
 Prezentprogramo creates a directory by the name of slide if it possible.
 However, Ii is possible to create a seperate directory too.
-For Example you can use my `computer courses slide <https://github.com/yoosofan/slide>_`
+For Example you can use my `computer courses slide https://github.com/yoosofan/slide
 to test it
 
 .. code:: sh
