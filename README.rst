@@ -46,7 +46,8 @@ Usage
 -----
 .. code:: sh
 
-    prezentprogramo prezentprogramo/docs/examples/cpu.rst
+    cd prezentprogramo/docs/examples/
+    prezentprogramo cpu.rst
 
 It will automatically open browser if it is possible.
 If the browser did not open then run your browser
