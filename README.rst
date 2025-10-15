@@ -26,92 +26,31 @@ Simple but not the best way to install
 
     pip3 install prezentprogramo
 
-It is better to follow the following steps instead because
-there will be less problems in the long run.
-
-Prepare Environment
-^^^^^^^^^^^^^^^^^^^
-These steps can be done once. You don't need to repeat them unless you really need to.
-
+uv
+^^
 `uv <https://github.com/astral-sh/uv>`_ is a Python package and project manager.
 Using uv has multiple benefits including installing any version of python3 and
 related packages on it. uv can reduce many conflicts and problems you may face if you use pip alone.
 While it is not necessary but I would recommend to use it instead of pip.
+At first, install `curl <https://curl.se/download.html>`_
 
-#. Install the latest python3
-    #. uv
+.. code:: sh
 
-        .. code:: sh
-
-            # First install curl from
-            # https://curl.se/download.html
-            # Instead on any debian based linux use the following command
-            apt install curl
-
-        .. code:: sh
-
-            curl -LsSf https://astral.sh/uv/install.sh | sh
-
-        .. code:: sh
-
-            uv self update # update uv periodically
-
-      #. Install python3
-
-          .. code:: sh
-
-              uv python install 3.14
-
-#. It is better to use virtual environment in python3
-    #. Create virtual environment
-
-        #. Using uv
-
-            .. code:: sh
-
-                uv venv --python 3.14 myvenv
-
-        #. Pure python
-
-            .. code:: sh
-
-                python -m venv myvenv
-
-    #. Activate virtual environment whenever you want to use prezentprogramo
-
-        .. code:: sh
-
-            source myvenv/bin/activate
-
-Install Prezentprogramo
-^^^^^^^^^^^^^^^^^^^^^^^
-#. Or use pypi.org
-
-    #. uv
-
-        .. code:: sh
-
-            uv tool install prezentprogramo
-
-    #. Or pip
-
-        .. code:: sh
-
-            pip3 install prezentprogramo
+	curl -LsSf https://astral.sh/uv/install.sh | sh
+    uv python install 3.14
+    uv venv --python 3.14 myvenv
+    source myvenv/bin/activate
+    uv tool install prezentprogramo
 
 Usage
 -----
-Use prezentprogramo::
+.. code:: sh
 
-    $ prezentprogramo prezentprogramo/docs/examples/tutorial.rst
+    prezentprogramo prezentprogramo/docs/examples/cpu.rst
 
 It will automatically open browser if it is possible.
 If the browser did not open then run your browser
 and type the following link in your browser
-
-Then you can deactivate virtual environment::
-
-    $ deactivate
 
 Prezentprogramo creates a directory by the name of slide if it possible.
 However, Ii is possible to create a seperate directory too.
