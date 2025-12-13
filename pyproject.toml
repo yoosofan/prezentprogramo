@@ -11,6 +11,9 @@ description = "Makes impress.js presentations from reStructuredText"
 # description = "Another text based (rst) presentation tool"
 
 readme = "README.rst"
+license = "GPL-3.0-or-later"
+#license-files = ["LICENSE.txt"]
+
 requires-python = ">=3.10"
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -23,9 +26,8 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
 ]
-license = "GPL-3.0-or-later"
-#license-files = ["LICENSE.txt"]
 
 keywords = ["presentations", "restructuredtext"]
 
@@ -53,16 +55,41 @@ Issues = "https://github.com/yoosofan/prezentprogramo/issues"
 test = [
     "pytest",
     "pytest-cov",
-    "manuel",
+    "manual",
 ]
-testing = ["manuel"]
-
+testing = ["manual"]
 
 [project.entry-points."hovercraft.main"]
 prezentprogramo = "hovercraft:main"
 
 [project.scripts]
 prezentprogramo = "hovercraft:main"
+
+# Good choice for transitioning to the new version and testing it while using old version
+#bildumilo = "prezentprogramo.core:main"
+bildumilo = "prezentprogramo.main:main"
+# https://github.com/docutils/docutils/blob/master/docutils/pyproject.toml
+
+
+[build-system]
+requires = ["uv_build >= 0.9.3"]
+build-backend = "uv_build"
+
+
+[tool.flake8]
+max-line-length = "120"
+ignore = "E203 W503"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+
+# [project.optional-dependencies]
+# gui = ["PyQt5"]
+# cli = [
+#   "rich",
+#   "click",
+# ]
 
 #[tool.setuptools]
 #include-package-data = true
@@ -79,10 +106,3 @@ prezentprogramo = "hovercraft:main"
 
 #[tool.setuptools.dynamic]
 #readme = {file = ["README.rst", "CONTRIBUTORS.txt", "CHANGES.txt"]}
-
-[tool.flake8]
-max-line-length = "120"
-ignore = "E203 W503"
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]

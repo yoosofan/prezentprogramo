@@ -1,6 +1,6 @@
 Prezentprogramo
 ===============
-Prezentprogramo is a tool to make `impress.js <https://impress.js.org>`_ presentations from
+Prezentprogramo is a tool to make `impress.js <https://github.com/impress/impress.js>`_ presentations from
 reStructuredText. For a quick explanation, see one of my `slides <https://yoosofan.github.io/slide/os/ps>`_ or check list of them https://yoosofan.github.io/slide/
 
 Based on `Hovercraft! <https://github.com/regebro/hovercraft>`_
