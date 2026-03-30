@@ -1,25 +1,35 @@
 #!/bin/bash
-function run22(){
+function commot_tasks1(){
     rsync -av --delete ~/research/projects/prezentprogramo/ ~/temp/prezent/
+
+    #uv tool uninstall --all
+
     uv tool uninstall prezentprogramo
     uv cache clean prezentprogramo
+
+    #uv cache clean
+
     uv tool install ~/temp/prezent/
+
+}
+function run22(){
+    commot_tasks1
+
     cd ~/research/projects/slide/os/
     rm -rf cpu/
     prezentprogramo cpu.rst
 }
 function bildumilo_test_run(){
-    rsync -av --delete ~/research/projects/prezentprogramo/ ~/temp/prezent/
-    uv tool uninstall prezentprogramo
-    uv cache clean prezentprogramo
-    uv tool install ~/temp/prezent/
+    commot_tasks1
+
     cd ~/temp/prezent/
     bildumilo ~/temp/prezent/tests/test_data/simple.rst ~/temp/prezent/tests/test_data/simple.rst.html
     cd -
 }
 
-#run22
-bildumilo_test_run
+run22
+# source /home/ahmad/install/uv.virtual.environments/p3.14.3/bin/activate
+#bildumilo_test_run
 
 : <<'COMMENT11'
 uv self update

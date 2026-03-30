@@ -59,8 +59,8 @@ test = [
 ]
 testing = ["manual"]
 
-[project.entry-points."hovercraft.main"]
-prezentprogramo = "hovercraft:main"
+#[project.entry-points."hovercraft.main"]
+#prezentprogramo = "hovercraft:main"
 
 [project.scripts]
 prezentprogramo = "hovercraft:main"
@@ -72,9 +72,15 @@ bildumilo = "prezentprogramo.main:main"
 
 
 [build-system]
-requires = ["uv_build >= 0.9.3"]
-build-backend = "uv_build"
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
 
+#requires = ["uv_build >= 0.9.3"]
+#build-backend = "uv_build"
+
+[tool.setuptools.package-data]
+"prezentprogramo" = ["**"]
+"hovercraft" = ["**"]
 
 [tool.flake8]
 max-line-length = "120"
