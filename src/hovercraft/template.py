@@ -3,7 +3,7 @@ import configparser
 import shutil
 import glob
 
-from pathlib import Path
+#from pathlib import Path
 
 from lxml import etree
 
@@ -98,12 +98,12 @@ class Template(object):
 
         config = configparser.ConfigParser()
 
-        config_file = Path(__file__).parent.absolute()  / "templates/default/template.cfg"
-        print(config_file)
-        if not config_file.exists():
-          raise ValueError("Configuration file 'config.ini' not found or could not be read.")
-        with config_file.open(mode = 'r', encoding="utf-8") as m222:
-          print(m222.readlines())
+        #config_file = Path(__file__).parent.absolute()  / "templates/default/template.cfg"
+        #print(config_file)
+        #if not config_file.exists():
+        #  raise ValueError("Configuration file 'config.ini' not found or could not be read.")
+        #with config_file.open(mode = 'r', encoding="utf-8") as m222:
+        #  print(m222.readlines())
         config.read(config_file)
         self.config = config["hovercraft"]
 
