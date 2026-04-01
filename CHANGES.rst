@@ -15,7 +15,8 @@ Acknowledgments
 Text before using Gemini (Google AI)
 ``````````````````````````````````````````
 * Fix build problem for newer version of uv
-* Put two program in one folder (under src):
+* Put two program in one folder (under src)
+
     * prezentprogramo: As the continuation of hovercraft right now
     * buildomlo as a new implementation based on newer docutils version
     * After completion of newer implementation their name will be change to each other

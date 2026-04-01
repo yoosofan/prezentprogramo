@@ -79,7 +79,7 @@ https://github.com/impress/impress.js/tree/master/src/plugins/mobile
 
 rst2html5
 ^^^^^^^^^^
-After changing the whole structure to directly use rst2html5, 
+After changing the whole structure to directly use rst2html5,
 then it could be easier to make a suitable html for print.
 
 opera webdriver
@@ -96,7 +96,7 @@ https://github.com/attakei/deck2pdf-python
 
 https://pypi.org/project/deck2pdf/
 
-Python library to generate PDF from presentation html 
+Python library to generate PDF from presentation html
 
 deck2pdf is converter from your html slide into PDF format keeping slide layout.
 Use as CLI only
@@ -240,7 +240,7 @@ COMMENT11
 
 		# uv publish dist/*
 		# uv publish --token <your_pypi_token>
-		
+
 		twine check --strict dist/*
 		twine upload dist/*
 	}
@@ -270,3 +270,9 @@ related
 uv
 ^^^^
 https://blog.appsignal.com/2025/09/24/switching-from-pip-to-uv-in-python-a-comprehensive-guide.html
+
+date based
+----------
+2026/04/01
+^^^^^^^^^^
+* Change created folder name for each rst slide to ``rst_name.htmls.prezaentprogramo/``
