@@ -72,14 +72,14 @@ bildumilo = "prezentprogramo.main:main"
 
 
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 #requires = ["uv_build >= 0.9.3"]
 #build-backend = "uv_build"
 
 [tool.setuptools.package-data]
-"prezentprogramo" = ["**"]
+"prezentprogramo" = ["data/*"]
 "hovercraft" = ["**"]
 
 [tool.flake8]

@@ -1,5 +1,25 @@
 Prezentprogramo
 ===============
+3.3 (2026/04/01)
+----------------
+* **Fixed build compatibility issues** with newer versions of `uv`.
+* **Restructured project layout** by moving core programs into the ``src/`` directory:
+    * ``prezentprogramo``: Currently maintained as the successor to Hovercraft.
+    * ``bildumilo``: A new implementation leveraging the latest ``docutils`` versions.
+* **Planned migration:** Upon completion of the new implementation, the names of the two programs will be swapped to reflect the transition.
+
+Acknowledgments
+^^^^^^^^^^^^^^^
+* Technical documentation and grammatical refinements provided with assistance from **Gemini (Google AI)** for this changes.
+
+Text before using Gemini (Google AI)
+``````````````````````````````````````````
+* Fix build problem for newer version of uv
+* Put two program in one folder (under src):
+    * prezentprogramo: As the continuation of hovercraft right now
+    * buildomlo as a new implementation based on newer docutils version
+    * After completion of newer implementation their name will be change to each other
+
 3.2 (2025/10/04)
 ----------------
 * Fix convert to pdf
@@ -9,8 +29,8 @@ Prezentprogramo
 * Replace setup.cfg by pyproject.toml
 * update impress.js to fix substep
 
-Changes
-=======
+Old Changes
+===========
 * fontURL:"js/output/chtml/fonts/tex-woff-v2"
 * fontURL:n.Package.resolvePath("output/chtml/fonts/woff-v2"
 * ("output/chtml/fonts/tex"
@@ -32,7 +52,7 @@ Changing Name
 * https://easyshiksha.com/eo/retaj_kursoj/la-kompleta-google-lumbildoj-majstra-klaso-majstro-google-lumbildoj
 * https://morningdough.com/eo/google-drive/what-is-google-slides/
 
-Prezentilo 
+Prezentilo
 ----------
 LibreOffice uses the term "Prezentilo" for LibreOffice Impress.
 Therefore, it is better to change the name of the project to "Prezentilo"
@@ -95,7 +115,7 @@ prelegaj lumbildoj
 lecture slides
 
 prezenta programaro
-presentation software 
+presentation software
 
 slideshow generator
 generatoro de bildoprezento
@@ -111,10 +131,10 @@ prezenta aplikaĵo
 presentation application
 
 Ahmad Yoosofan, [10/18/23 9:59 PM]
-presentation generator 
+presentation generator
 generatoro de prezento
 
-slideshow generator 
+slideshow generator
 generatoro de bildoprezento
 
 Hovercraft Changes

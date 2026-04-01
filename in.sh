@@ -12,6 +12,7 @@ function commot_tasks1(){
     uv tool install ~/temp/prezent/
 
 }
+
 function run22(){
     commot_tasks1
 
@@ -19,6 +20,7 @@ function run22(){
     rm -rf cpu/
     prezentprogramo cpu.rst
 }
+
 function bildumilo_test_run(){
     commot_tasks1
 
@@ -51,15 +53,25 @@ flake8 . --ignore=E501,W503,E203
 uv tool install autopep8
 autopep8 --in-place --aggressive  --recursive --list-fixes --max-line-length 79 .
 
-uv build
+# by uv
 
-# uv publish dist/*
-# uv publish --token <your_pypi_token>
+    uv build
+
+    # uv publish dist/*
+    # uv publish --token <your_pypi_token>
+
+uv tool install build
+uv tool install wheel
+
+python -m build
 
 twine check --strict dist/*
 twine upload dist/*
 
+### Old
+
 uv tool install ini2toml[full]
 ini2toml --help
 ini2toml -o setup.toml setup.cfg
+
 COMMENT11
