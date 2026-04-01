@@ -85,22 +85,22 @@ Screen Shot
 
         prezentprogramo cpu.rst
 
-#. Take screen shot by operating system
-    1. for `ubuntu-mate https://ubuntu-mate.org/download/>`_ <use short cut < Shift + PrtSc >
-    2. Select the area
-    3. Save
-#. Or use browser screenshot
-    #. like https://browsernative.com/screenshot-extension/
+#. Take screen shot
+    * Operating system
+        1. for `ubuntu-mate <https://ubuntu-mate.org/download/>`_ <use short cut < Shift + PrtSc >
+        2. Select the area
+        3. Save
+    * Or use `<browser screenshot https://browsernative.com/screenshot-extension/>`_
 #. convert images to pdf
     #. Install tools lilke image magic
 
-          * for debian or ubuntu (especially `ubuntu-mate https://ubuntu-mate.org/download/>`_ !)
+          * for debian or ubuntu (especially `ubuntu-mate <https://ubuntu-mate.org/download/>`_ !)
 
               .. code:: sh
 
-                  sudo apt-get install imagemagick --fix-missing
+                  sudo apt install imagemagick --fix-missing
 
-          *. link https://help.ubuntu.com/community/ImageMagick
+          * link https://help.ubuntu.com/community/ImageMagick
 
     #. convert `*.png` cpu.pdf
 
