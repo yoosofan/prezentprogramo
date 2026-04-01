@@ -51,11 +51,15 @@ Usage
 
 It will automatically open browser if it is possible.
 If the browser did not open then run your browser
-and type the following link in your browser
+and type the following link in your browser.
 
-Prezentprogramo creates a directory by the name of slide if it possible.
-However, Ii is possible to create a seperate directory too.
-For Example you can use my `computer courses slide https://github.com/yoosofan/slide
+.. code:: sh
+
+    http://127.0.0.1:8000
+
+Prezentprogramo creates a directory by the name of slide if it is possible.
+However, it is possible to create a seperate directory too.
+For Example you can use my `computer courses slide <https://github.com/yoosofan/slide>`_
 to test it
 
 .. code:: sh
