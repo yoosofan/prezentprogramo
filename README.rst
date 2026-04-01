@@ -90,7 +90,7 @@ Screen Shot
         1. for `ubuntu-mate <https://ubuntu-mate.org/download/>`_ <use short cut < Shift + PrtSc >
         2. Select the area
         3. Save
-    * Or use `<browser screenshot https://browsernative.com/screenshot-extension/>`_
+    * Or use `browser screenshot <https://browsernative.com/screenshot-extension/>`_
 #. convert images to pdf
     #. Install tools lilke image magic
 
