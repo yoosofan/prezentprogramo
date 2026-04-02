@@ -276,3 +276,14 @@ date based
 2026/04/01
 ^^^^^^^^^^
 * Change created folder name for each rst slide to ``rst_name.htmls.prezaentprogramo/``
+* Move more about installation to docs/install.rst
+    * https://packaging.python.org/en/latest/tutorials/packaging-projects/
+    * https://github.com/nedbat/pkgsample/blob/main/Makefile
+    * build.sh to Makefile
+    * makefile documentation for python
+    * https://github.com/python/docs-community/blob/main/Makefile
+    * https://svn.python.org/projects/python/trunk/Doc/Makefile
+    * https://gist.github.com/MarkWarneke/2e26d7caef237042e9374ebf564517ad
+    * https://makefiletutorial.com/
+    * https://earthly.dev/blog/python-makefile/
+    * https://www.kdnuggets.com/the-case-for-makefiles-in-python-projects-and-how-to-get-started
