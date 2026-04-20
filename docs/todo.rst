@@ -72,6 +72,68 @@ https://inventwithpython.com/blog/comparing-python-linters-2022.html
 https://trunk.io/learn/comparing-ruff-flake8-and-pylint-linting-speed
 https://pythonspeed.com/articles/pylint-flake8-ruff/
 
+GUI instead of web browser
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+suggest a python GUI package that uses html and css  but doesn't need webbrowser
+
+If you want to build a Python GUI using HTML and CSS but without forcing your users to open a web browser, pywebview is your best bet. [1, 2]
+While these libraries use web technologies, they don't require an external browser like Chrome or Firefox to be open. Instead, they use a "webview" component—a built-in part of the operating system (like WinForms on Windows or Cocoa on macOS) to render your UI in a native window. [2, 3, 4]
+## Top Recommendations
+
+* pywebview: The most direct choice for what you're asking. It is a lightweight wrapper that displays HTML/CSS in its own native window. It doesn't bundle a heavy browser engine like Electron, making the final executable much smaller.
+* [NiceGUI](https://nicegui.io/): A modern framework that lets you build UIs in pure Python but with full support for adding custom HTML and CSS. It can run in "native mode," which automatically opens a separate window using a webview rather than a browser tab.
+* [Eel](https://github.com/python-eel/Eel): Often described as a "lightweight Electron for Python". You write your frontend in standard HTML/CSS and your backend in Python, and they communicate seamlessly. It typically opens in a browser-like window, but can be configured to look like a standalone app.
+* PySide6 / PyQt6 (with WebEngine): For professional-grade software, you can use the Qt WebEngine module. This embeds a full Chromium-based browser engine directly into a standard Qt desktop window, giving you complete CSS styling power alongside native desktop widgets. [1, 2, 3, 5, 6, 7, 8, 9]
+
+## Quick Comparison
+
+| Library [1, 2, 5, 7, 10, 11] | Primary Language | Best For | Footprint |
+|---|---|---|---|
+| pywebview | HTML/CSS | Lightweight wrappers | Very Small |
+| NiceGUI | Python (supports CSS) | Rapidly building dashboards | Medium |
+| Eel | HTML/CSS/JS | Simple offline web-tech apps | Small |
+| PySide6 | Python/C++ | Complex, professional apps | Large |
+
+Are you looking to build a simple tool or a large-scale commercial application?
+
+[1] [https://medium.com](https://medium.com/@james.miller941/9-python-gui-libraries-to-build-modern-applications-2c04396b11d8)
+[2] [https://python.libhunt.com](https://python.libhunt.com/pywebview-alternatives)
+[3] [https://www.pythonguis.com](https://www.pythonguis.com/tutorials/getting-started-nicegui/)
+[4] [https://www.reddit.com](https://www.reddit.com/r/learnpython/comments/1gd9pq4/have_gui_without_downloading_external_libraries/)
+[5] [https://www.pythonguis.com](https://www.pythonguis.com/faq/html-css-and-js-in-a-desktop-app-qt-webengine-vs-electron-vs/)
+[6] [https://www.youtube.com](https://www.youtube.com/watch?v=gyscrrS4hEA&t=17)
+[7] [https://python.plainenglish.io](https://python.plainenglish.io/11-python-gui-libraries-that-dont-suck-in-2025-c3f065e75ebf)
+[8] [https://www.youtube.com](https://www.youtube.com/watch?v=Bh8pYfwFjA0&t=26)
+[9] [https://www.youtube.com](https://www.youtube.com/watch?v=Bh8pYfwFjA0&t=26)
+[10] [https://medium.com](https://medium.com/@james.miller941/9-python-gui-libraries-to-build-modern-applications-2c04396b11d8)
+[11] [https://www.youtube.com](https://www.youtube.com/watch?v=gyscrrS4hEA&t=17)
+
+PyWebView
+`````````
+https://pywebview.flowrl.com/examples/
+https://github.com/r0x0r/pywebview/blob/docs/examples/todos/main.py
+https://pywebview.flowrl.com
+
+PySide
+``````
+http://pyside.org
+https://wiki.qt.io/Qt_for_Python
+https://github.com/pyside/pyside-setup
+
+NiceGui
+```````
+It is not useful because it needs web browser any way
+
+https://nicegui.io
+https://nicegui.io/documentation/matplotlib
+
+does python nicegui support mathml natively
+does python nicegui support mathml and grid and latest html css changes
+
+
+does python nicegui support graphviz dot format?
+how to use python nicegui for directly render a dot (graphviz) source dynamically?
+
 PDF
 ----
 https://github.com/rggarcia/impressjs2pdf
@@ -146,6 +208,51 @@ impress.js more information
 https://github.com/impress/impress.js/blob/master/GettingStarted.md
 https://dhananjaypurohit.medium.com/impress-js-a-better-way-of-making-presentations-4e5d7686e98c
 http://platika.github.io/impress.js/
+
+impress.js replacement
+^^^^^^^^^^^^^^^^^^^^^^
+alternative for impress.js for slide show
+html slideshow
+
+b6plus.js
+`````````
+https://www.w3.org/Talks/Tools/b6plus/
+https://www.w3.org/Talks/Tools/b6plus-style-2025.html#slipshow
+https://www.w3.org/Talks/Tools/b6plus-editor/
+https://patrickbrosset.com/slides/AC-2025/#explorer-website
+https://temperlang.github.io/tpac2025/Templates/Overview.html
+https://www.w3.org/Talks/Tools/b6plus/writing-style-sheets.html
+
+https://w3c.social/@bert
+https://www.w3.org/People/Bos/
+
+https://github.com/bert-github?tab=repositories
+https://github.com/bert-github/SlideSyncBot
+https://github.com/bert-github/SSE-Server
+
+https://www.w3.org/Talks/Tools/b6plus/simple.css
+
+https://github.com/orgs/w3c/repositories?q=sort%3Aname-asc&page=22
+
+
+slidy2
+``````
+https://www.w3.org/Talks/Tools/Slidy2/Overview.html#(1)
+
+i-slide
+```````
+https://w3c.github.io/i-slide/
+
+inspire.js
+``````````
+https://github.com/LeaVerou/inspire.js/tree/master/src
+https://github.com/LeaVerou/inspire.js
+https://inspirejs.org
+
+slipshow
+````````
+https://github.com/panglesd/slipshow
+https://slipshow.org/#features
 
 Similar projects
 ----------------
@@ -270,6 +377,14 @@ related
 uv
 ^^^^
 https://blog.appsignal.com/2025/09/24/switching-from-pip-to-uv-in-python-a-comprehensive-guide.html
+
+Add repository to other places
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+dainiak
+```````
+https://github.com/dainiak/lists
+https://github.com/dainiak/lists/blob/main/data/slideshow-frameworks.json
+https://www.dainiak.com/lists/slideshow-frameworks.html
 
 date based
 ----------

@@ -1,6 +1,19 @@
 Introduction
 ============
 
+Features
+--------
+* Write your presentations in a text markup language. No slow, limiting GUI, no annoying HTML!
+* Pan, rotate and zoom in 3D, with automatic repositioning of slides!
+* A presenter console with notes and slide previews!
+* Support for showing mathematical formulas.
+* Styling is easy with CSS.
+* The slide show generated is in HTML, so you only need a web browser to show it.
+* Easy sharing, as it can be put up on a website for anyone to see!
+
+Full documentation of Hovercraft is available at https://hovercraft.readthedocs.io/en/latest/ , and also in the
+documentation subdirectory.
+
 GUI tools are limiting
 ----------------------
 

@@ -1,5 +1,6 @@
 
 #function commot_tasks1(){
+.ONESHELL:
 build:
 
 	rsync -av --delete ~/research/projects/prezentprogramo/ ~/temp/prezent/
@@ -18,6 +19,9 @@ build:
 	cd ~/research/projects/slide/os/ ; \
 	rm -rf cpu/  ; \
 	prezentprogramo cpu.rst ;
+
+
+#	python3 --version
 #}
 
 #function bildumilo_test_run(){
