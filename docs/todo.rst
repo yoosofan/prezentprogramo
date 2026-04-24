@@ -17,7 +17,7 @@ General guide line for change
     :js:
     :width:
     :height:
- 
+
 یک پوشه کلی هم برای rst2sb_slides_assets نیز ساخته شود که تنظیمات عمومی و پرونده‌های جاوااسکریپت ، css و همانند آن در این پوشه گذاشته شود. خروجی همه اسلایدها به صورت پیش‌فرض در یک پوشه بالاتر و در یک زیرپوشه جدید باشد که پوشه‌های درس‌ها جداگانه گذاشته شود یعنی زیر پوشه‌های آن شبیه پوشه‌های اصلی اسلایدها است و خوبی بزرگش این خواهد بود که می‌تواند یک مخزن متفاوت باشد و مخزن اصلی اسلایدها بی‌جهت با html و دیگر چیزها شلوغ نشود. در خط فرمان می‌توان گزینه‌هایی گذاشت که رفتار را شبیه hovercraft یا bildumilo کند و کنار rst خود اسلاید پوشه بسازد.
 
 با این تغییرات هم کار پیاده‌سازی ساده‌تر می‌شود و همین که ساختار به شکل مورد علاقه من در خروجی تبدیل می‌شود. شاید در آینده نیز برای نمایش بهتر پرونده اصلی برای تقسیم بندی هر اسلاید درون پرونده اسلاید افزونه برای ویرایشگر محبوبم ساختم تا راحت‌تر بتوانم میان اسلایدها حرکت کنم همچنین بهتر است این افزونه به طور خودکار شماره اسلاید را در بخش نمایش تقسیم بندی ساختار پرونده قرار دهد
@@ -477,7 +477,7 @@ from docutils.parsers.rst import Directive, directives
 
 class MyGraphvizDirective(Directive):
     has_content = True
-    
+
     def run(self):
         # Your DOT parsing logic goes here
         return []
@@ -490,7 +490,7 @@ directives.register_directive('pp.graphviz', MyGraphvizDirective)
 Once registered, you or your users can call it in the .rst file by typing the exact name you registered.
 ```rst
 .. pp.graphviz::
-   
+
    digraph G {
        A -> B;
    }
@@ -548,7 +548,7 @@ class Slide(nodes.General, nodes.Element):
 
 class SlideDirective(Directive):
     has_content = True
-    
+
     def run(self):
         # Create a container node for the slide
         slide_node = Slide()
@@ -637,7 +637,7 @@ class Slide(nodes.General, nodes.Element):
 
 class SlideDirective(Directive):
     has_content = True
-    
+
     def run(self):
         # Create a container node for the slide
         slide_node = Slide()
@@ -736,7 +736,7 @@ If your priority is **minimalism and the Marker Tool**, b6plus is still a strong
 Wrap modernized javascript around old js code
 `````````````````````````````````````````````
 
-Thanks, 
+Thanks,
 
 1. I didn't fully understand the "Modernizing it". Do you have any small projects that use this method? Or you can make simple example to show how it works?
 
@@ -762,11 +762,11 @@ export const initModernControls = () => {
     window.addEventListener('wheel', (event) => {
         // We detect the wheel move...
         const direction = event.deltaY > 0 ? 'ArrowRight' : 'ArrowLeft';
-        
+
         // ...and we "fake" a keypress that the old b6plus code understands
         const fakeKey = new KeyboardEvent('keydown', { key: direction });
         document.dispatchEvent(fakeKey);
-        
+
         console.log(`Modern JS told the Old JS to go: ${direction}`);
     });
 };
@@ -812,11 +812,118 @@ This way, you get the **best of both worlds**:
 **A relevant follow-up question:**
 In your YouTube videos, do you find it more helpful to draw "live" on top of existing text, or do you prefer having a dedicated "blank space" on the slide for sketching?
 
-
 Pro model limit
 ```````````````
 Fri Apr 24 08:14:28 +04 2026
 
+
+How to add more on drawing 2026/04/24 12:25:39
+``````````````````````````````````````````````
+Thanks, drawing on the current content of a slide is preferable.
+In regards to drawing, it could be better if it is possible to do the following:
+
+1. Change the color of the drawing pen
+2. Change the width of drawing pen
+3. Adding text box and write in them
+
+Suggest some code samples for the above changes.
+
+Answer
+~~~~~~
+To add these capabilities to **b6plus**, we should follow the "Wrapper" strategy. Since `b6plus` uses a standard HTML5 `<canvas>` element for its drawing layer, we can create a modern UI overlay that controls that canvas's "context" (`ctx`).
+
+Here is a conceptual implementation of a **Modern Pen Toolbar** that you can inject into your generated HTML slides.
+
+### 1. The Toolbar HTML
+Your Python generator should inject this small HTML snippet at the end of the `<body>` tag:
+
+```html
+<div id="pen-controls" style="position: fixed; bottom: 10px; left: 10px; z-index: 1000; background: rgba(255,255,255,0.8); padding: 5px; border-radius: 5px; display: flex; gap: 10px; border: 1px solid #ccc;">
+    <input type="color" id="pen-color" value="#ff0000" title="Pen Color">
+    <input type="range" id="pen-width" min="1" max="10" value="3" title="Pen Width">
+    <button id="add-text-mode" title="Add Textbox">T</button>
+</div>
+```
+
+### 2. The Modern JavaScript Wrapper (ES6)
+This script finds the canvas created by `b6plus` and changes its behavior. Note that `b6plus` usually hides/shows the canvas when you toggle the marker mode (usually `F8`).
+
+```javascript
+// pen-extension.js
+export const initPenTools = () => {
+    const colorPicker = document.getElementById('pen-color');
+    const widthPicker = document.getElementById('pen-width');
+    const textBtn = document.getElementById('add-text-mode');
+
+    // Helper to get the b6plus canvas context
+    const getCanvasContext = () => {
+        const canvas = document.querySelector('canvas.b6plus-canvas'); // Check b6plus actual class name
+        return canvas ? canvas.getContext('2d') : null;
+    };
+
+    // 1. Change Color
+    colorPicker.addEventListener('input', (e) => {
+        const ctx = getCanvasContext();
+        if (ctx) {
+            ctx.strokeStyle = e.target.value;
+            ctx.fillStyle = e.target.value;
+        }
+    });
+
+    // 2. Change Width
+    widthPicker.addEventListener('input', (e) => {
+        const ctx = getCanvasContext();
+        if (ctx) ctx.lineWidth = e.target.value;
+    });
+
+    // 3. Adding Text (Simplified)
+    // When text mode is active, click on the slide to create an input
+    textBtn.addEventListener('click', () => {
+        document.body.style.cursor = 'text';
+
+        const placeText = (e) => {
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.style.position = 'fixed';
+            input.style.left = e.clientX + 'px';
+            input.style.top = e.clientY + 'px';
+            input.style.zIndex = '1001';
+            input.style.border = '1px dashed red';
+            input.style.background = 'transparent';
+            input.style.color = colorPicker.value;
+            input.style.fontSize = (widthPicker.value * 10) + 'px';
+
+            input.addEventListener('blur', () => {
+                const ctx = getCanvasContext();
+                if (ctx && input.value) {
+                    ctx.font = input.style.fontSize + " Arial";
+                    ctx.fillText(input.value, e.clientX, e.clientY);
+                }
+                document.body.removeChild(input);
+                document.body.style.cursor = 'default';
+            }, { once: true });
+
+            document.body.appendChild(input);
+            input.focus();
+            window.removeEventListener('click', placeText);
+        };
+
+        window.addEventListener('click', placeText, { once: true });
+    });
+};
+```
+
+### 💡 Why this is better for your workflow:
+1.  **Persistence:** By using `ctx.fillText`, the text becomes part of the canvas image. When you use the built-in `b6plus` save/export feature, your text is saved alongside your drawings.
+2.  **No Server Needed:** This uses pure Vanilla JS. It works perfectly when opening the `.html` file directly from your computer (the `file://` protocol).
+3.  **Visual Clarity:** During your YouTube recordings, having the `color` and `width` controls visible allows your students to see when you are switching from a "highlighting" pen (thick/yellow) to a "writing" pen (thin/red).
+
+### A Suggestion for your "Daily Pressure"
+If writing these extensions takes too much time, you could integrate a library called **[Literal](https://github.com/literallycanvas/literallycanvas)** or **[Fabric.js](http://fabricjs.com/)**. However, these are much "heavier."
+
+The small manual wrapper above keeps **prezentprogramo** lightweight and ensures you don't lose the simplicity of `b6plus`.
+
+How do you currently save your drawings after a lecture? Do you take a screenshot, or do you want the tool to save the "marked" slides as a new file?
 
 date based
 ----------
