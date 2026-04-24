@@ -410,6 +410,414 @@ https://github.com/dainiak/lists
 https://github.com/dainiak/lists/blob/main/data/slideshow-frameworks.json
 https://www.dainiak.com/lists/slideshow-frameworks.html
 
+
+AI conversations
+----------------
+Gemini Replacing impress.js by sb6+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Directive Name Fri Apr 24 08:02:25 +04 2026
+```````````````````````````````````````````
+
+In implementation of extending docutils abilities, is it possible to use the same directive name for another purpose? How can be implemented ? For example I could use simpler directive name instead of yographviz but I wouldn't be sure that docutils may not use a simpler name in future.
+
+Answer
+~~~~~~
+Your instinct to use a unique name like yographviz was actually spot-on. When building extensions, name collisions are a genuine concern.
+To answer your question directly: **Yes, it is absolutely possible to use the same directive name** (like graphviz instead of yographviz), which effectively overrides any existing directive with that name.
+Here is exactly how Docutils handles this and how you can implement it.
+### How Directive Registration Works in Docutils
+In Docutils, directives are stored in a global dictionary within the docutils.parsers.rst.directives module. When you register a directive, you map a string (the directive name) to a Python class.
+If you register a directive using a name that is already taken, **Docutils will silently overwrite the existing mapping**. The last directive registered with that name "wins."
+### How to Implement an Override
+If you wanted to use the simpler name graphviz, you would implement your directive class as usual, and then register it under the name graphviz.
+Here is the Python implementation:
+```python
+from docutils.parsers.rst import Directive, directives
+
+# 1. Define your custom directive class
+class MyGraphvizDirective(Directive):
+    has_content = True
+    # ... your implementation here ...
+
+    def run(self):
+        # ... logic to process the DOT code ...
+        return []
+
+# 2. Register it using the simple name
+# If 'graphviz' already exists, this overwrites it for your runtime.
+directives.register_directive('graphviz', MyGraphvizDirective)
+
+```
+By putting this registration code in your prezentprogramo initialization logic (before the parsing of the RST file begins), your custom parser will intercept any .. graphviz:: blocks and route them to your custom class.
+### The Risks of Overriding (Why Your Current Approach is Better)
+While overriding is easy to implement, your initial caution was correct. Overriding standard names or using highly generic names comes with architectural risks:
+ * **Future Docutils Updates:** As you noted, if Docutils ever adds a native graphviz directive, your code will overwrite it. This might be fine if you *want* to override it, but it becomes problematic if users want to use the native Docutils behavior elsewhere in the document.
+ * **Sphinx Compatibility:** Many developers use Sphinx (which is built on Docutils) alongside custom tools. Sphinx already has a very famous and heavily used graphviz extension. If a user tries to compile their slides with your tool, and their documentation with Sphinx, having identically named directives with different feature sets or attributes will cause massive headaches.
+ * **Loss of Standard Functionality:** If you override a standard directive (like image or table) to add custom presentation logic, you completely lose the ability to use standard images or tables in that document.
+### Best Practice: The Namespace Approach
+Instead of overriding standard names, the standard academic and enterprise practice for Docutils/Sphinx extensions is to use a **namespace prefix**.
+Your yographviz is perfectly fine, but if you want something that feels a bit more standard or readable, you can use a hyphenated prefix indicating your application's namespace. For example:
+ * .. pp-graphviz:: (for **p**rezent**p**rogramo)
+ * .. yo-graphviz::
+This guarantees 100% safety from future Docutils updates and instantly tells anyone reading the RST file that this block is specifically parsed by your custom extension, not standard Docutils.
+
+Can a period (dot) be part of directive name?
+`````````````````````````````````````````````
+Answer
+~~~~~~
+
+Yes, a period (dot) can absolutely be used as part of a directive name!
+In fact, according to the official Docutils reStructuredText specification, directive names (referred to as "directive types") are case-insensitive single words that can contain **alphanumerics plus isolated internal hyphens, underscores, plus signs, colons, and periods.**
+Using a period is actually a brilliant way to implement the namespace approach we discussed earlier. It is commonly used in object-oriented programming to show ownership or hierarchy, making it very intuitive for developers.
+Here is how you can implement and use it in your code.
+### 1. Registering the Directive with a Period
+You register it exactly the same way as any other name, just including the dot in the string.
+```python
+from docutils.parsers.rst import Directive, directives
+
+class MyGraphvizDirective(Directive):
+    has_content = True
+    
+    def run(self):
+        # Your DOT parsing logic goes here
+        return []
+
+# Registering with a period to indicate the 'pp' (prezentprogramo) namespace
+directives.register_directive('pp.graphviz', MyGraphvizDirective)
+
+```
+### 2. Using it in your reStructuredText
+Once registered, you or your users can call it in the .rst file by typing the exact name you registered.
+```rst
+.. pp.graphviz::
+   
+   digraph G {
+       A -> B;
+   }
+
+```
+### Why this is an excellent choice:
+ * **Zero Collision Risk:** It guarantees you will never clash with Docutils' native graphviz (if they ever make one) or Sphinx's graphviz extension.
+ * **Semantic Clarity:** The dot notation (pp.graphviz) instantly communicates to the user that this is the "graphviz component belonging to the pp application." It looks professional and structured!
+
+compare impress.js sb6+
+```````````````````````
+
+
+I can definitely break down the strengths of **impress.js**, but I have to be completely candid with you: I am coming up empty on a presentation library called **sb6+**!
+It is possible "sb6+" is an internal tool, a very niche library, or maybe a typo for another popular framework (like **S5/S6**, **Slidev**, **Spectacle**, or even **Storybook 6+** for UI presentations).
+While you clarify what sb6+ is, here is a look at what makes impress.js tick, especially compared to standard linear slide tools.
+### 🌟 The Magic of impress.js
+Impress.js is heavily inspired by Prezi. Instead of a linear stack of slides, it treats your presentation as an **infinite 3D canvas**.
+**Key Features:**
+ * **Spatial Storytelling:** You place your "slides" (HTML elements) anywhere in a 3D space. You can scale them up or down, rotate them on the X, Y, or Z axes, and push them deep into the background.
+ * **CSS3 Power:** It relies entirely on modern CSS3 transforms and transitions. When you move from one slide to the next, the browser automatically animates the camera moving, zooming, and rotating to focus on the next element.
+ * **No Fixed Structure:** It is perfect for mind-maps or showing how small details fit into a massive overarching architecture (which is great for complex topics like Compiler hierarchies or Database schemas).
+**The Trade-offs:**
+ * **Authoring Complexity:** Because you are manually defining data-x, data-y, data-z, data-scale, and data-rotate for every single slide, writing an impress.js presentation by hand in HTML can be tedious and requires a lot of trial and error to get the spacing right.
+ * **Not Great for Simple Content:** If you just need to show 20 bullet-point slides sequentially, impress.js is massive overkill and can actually cause motion sickness for your audience if you overuse the spinning transitions.
+To help me give you a proper head-to-head comparison, **could you clarify what "sb6+" refers to (e.g., is it a typo for another framework like Slidev or S6, or perhaps a specific standard you are using)?**
+
+
+
+Aboat sb6 specifications
+````````````````````````
+
+Https://www.w3.org/Talks/Tools/b6plus/
+
+Source code: https://www.w3.org/Talks/Tools/b6plus/slides.zip
+
+Yes, I need only simple slide for my courses. I mostly don't need fancy slides because making and updating my slides in daily basis has enough pressure itself. As you can see, sb6+ have very good internal tools like having market to make lines on a slide like a simple paint program. I actually use Firefox extension for this matter. You can watch my last week videos in my YouTube channel and how I use it. But it took me years to find something like that while sb6+ already has it. Printing sb6+ slides are far easier than impress.js and it doesn't need to have a web browser engine and many extra python packages. Using sb6+ instead of impress.js in prezentprogrammo will decrease a lot of packages dependencies. My first today question was more about adding a directive for each slide by the name slide or variation of it instead of four dash for each slide in current implementation based on hovercraft
+
+
+Answer
+``````
+
+That makes perfect sense! **b6plus** (by Bert Bos at W3C) is an incredible choice for an academic setting. It follows the "Web Standards" philosophy: it's incredibly lightweight, accessible, and uses standard HTML structures rather than complex 3D transformations.
+Moving away from hovercraft (which is hard-coded to impress.js) to a custom b6plus generator for **prezentprogramo** will definitely make your workflow faster and reduce your Python dependency hell.
+### 1. Replacing the "Four Dash" Separator with a Directive
+Currently, hovercraft uses ---- (reStructuredText transitions) to split slides. If you want to use a directive like .. slide:: instead, you can implement a custom Docutils directive.
+This is much cleaner because it allows you to add **options** (like a specific slide class or background color) directly to that slide.
+**Python implementation for your tool:**
+```python
+from docutils import nodes
+from docutils.parsers.rst import Directive
+
+class Slide(nodes.General, nodes.Element):
+    pass
+
+class SlideDirective(Directive):
+    has_content = True
+    
+    def run(self):
+        # Create a container node for the slide
+        slide_node = Slide()
+        # Parse the content inside the .. slide:: block
+        self.state.nested_parse(self.content, self.content_offset, slide_node)
+        return [slide_node]
+
+# In your setup:
+# directives.register_directive('slide', SlideDirective)
+
+```
+**What your .rst will look like now:**
+```rst
+.. slide::
+   :class: cover-slide
+
+   Title of Slide
+   ==============
+   * Bullet one
+   * Bullet two
+
+```
+### 2. Why b6plus is better for your "Daily Pressure"
+You mentioned the pressure of daily updates. Here is why b6plus beats impress.js for a teacher:
+ * **The Marker/Pen Tool:** b6plus has that built-in F8 (or similar) drawing mode. In impress.js, the coordinates are so complex that if you draw on the screen and then zoom/rotate to the next slide, the drawings usually don't align or get lost in 3D space.
+ * **Printing/PDF:** b6plus uses standard CSS @media print. You just hit Ctrl+P and it prints one slide per page perfectly. impress.js usually requires a headless Chrome instance and a complex script just to get a decent PDF.
+ * **Simple Layouts:** b6plus doesn't require you to manage X, Y, and Z coordinates. If you add a paragraph, the slide just grows. In hovercraft/impress.js, if your text is too long, it overflows the "camera view," and you have to manually adjust the scale.
+### 3. Implementation Tip for b6plus
+When you write your writer for prezentprogramo, you just need to map the Slide node (from the code above) to a <section class="slide"> tag.
+**In your Writer's visit_Slide method:**
+```python
+def visit_Slide(self, node):
+    self.body.append('<section class="slide">')
+
+def depart_Slide(self, node):
+    self.body.append('</section>')
+
+```
+This will produce the exact HTML structure b6plus needs. No more fighting with hovercraft’s layout engine! Since you are already using Firefox extensions for marking, you'll find the native b6plus features even more integrated for your YouTube recordings.
+
+compare impress.js sb6+
+```````````````````````
+
+
+I can definitely break down the strengths of **impress.js**, but I have to be completely candid with you: I am coming up empty on a presentation library called **sb6+**!
+It is possible "sb6+" is an internal tool, a very niche library, or maybe a typo for another popular framework (like **S5/S6**, **Slidev**, **Spectacle**, or even **Storybook 6+** for UI presentations).
+While you clarify what sb6+ is, here is a look at what makes impress.js tick, especially compared to standard linear slide tools.
+### 🌟 The Magic of impress.js
+Impress.js is heavily inspired by Prezi. Instead of a linear stack of slides, it treats your presentation as an **infinite 3D canvas**.
+**Key Features:**
+ * **Spatial Storytelling:** You place your "slides" (HTML elements) anywhere in a 3D space. You can scale them up or down, rotate them on the X, Y, or Z axes, and push them deep into the background.
+ * **CSS3 Power:** It relies entirely on modern CSS3 transforms and transitions. When you move from one slide to the next, the browser automatically animates the camera moving, zooming, and rotating to focus on the next element.
+ * **No Fixed Structure:** It is perfect for mind-maps or showing how small details fit into a massive overarching architecture (which is great for complex topics like Compiler hierarchies or Database schemas).
+**The Trade-offs:**
+ * **Authoring Complexity:** Because you are manually defining data-x, data-y, data-z, data-scale, and data-rotate for every single slide, writing an impress.js presentation by hand in HTML can be tedious and requires a lot of trial and error to get the spacing right.
+ * **Not Great for Simple Content:** If you just need to show 20 bullet-point slides sequentially, impress.js is massive overkill and can actually cause motion sickness for your audience if you overuse the spinning transitions.
+To help me give you a proper head-to-head comparison, **could you clarify what "sb6+" refers to (e.g., is it a typo for another framework like Slidev or S6, or perhaps a specific standard you are using)?**
+
+
+
+Aboat sb6 specifications
+````````````````````````
+
+Https://www.w3.org/Talks/Tools/b6plus/
+
+Source code: https://www.w3.org/Talks/Tools/b6plus/slides.zip
+
+Yes, I need only simple slide for my courses. I mostly don't need fancy slides because making and updating my slides in daily basis has enough pressure itself. As you can see, sb6+ have very good internal tools like having market to make lines on a slide like a simple paint program. I actually use Firefox extension for this matter. You can watch my last week videos in my YouTube channel and how I use it. But it took me years to find something like that while sb6+ already has it. Printing sb6+ slides are far easier than impress.js and it doesn't need to have a web browser engine and many extra python packages. Using sb6+ instead of impress.js in prezentprogrammo will decrease a lot of packages dependencies. My first today question was more about adding a directive for each slide by the name slide or variation of it instead of four dash for each slide in current implementation based on hovercraft
+
+
+Answer
+``````
+
+That makes perfect sense! **b6plus** (by Bert Bos at W3C) is an incredible choice for an academic setting. It follows the "Web Standards" philosophy: it's incredibly lightweight, accessible, and uses standard HTML structures rather than complex 3D transformations.
+Moving away from hovercraft (which is hard-coded to impress.js) to a custom b6plus generator for **prezentprogramo** will definitely make your workflow faster and reduce your Python dependency hell.
+### 1. Replacing the "Four Dash" Separator with a Directive
+Currently, hovercraft uses ---- (reStructuredText transitions) to split slides. If you want to use a directive like .. slide:: instead, you can implement a custom Docutils directive.
+This is much cleaner because it allows you to add **options** (like a specific slide class or background color) directly to that slide.
+**Python implementation for your tool:**
+```python
+from docutils import nodes
+from docutils.parsers.rst import Directive
+
+class Slide(nodes.General, nodes.Element):
+    pass
+
+class SlideDirective(Directive):
+    has_content = True
+    
+    def run(self):
+        # Create a container node for the slide
+        slide_node = Slide()
+        # Parse the content inside the .. slide:: block
+        self.state.nested_parse(self.content, self.content_offset, slide_node)
+        return [slide_node]
+
+# In your setup:
+# directives.register_directive('slide', SlideDirective)
+
+```
+**What your .rst will look like now:**
+```rst
+.. slide::
+   :class: cover-slide
+
+   Title of Slide
+   ==============
+   * Bullet one
+   * Bullet two
+
+```
+### 2. Why b6plus is better for your "Daily Pressure"
+You mentioned the pressure of daily updates. Here is why b6plus beats impress.js for a teacher:
+ * **The Marker/Pen Tool:** b6plus has that built-in F8 (or similar) drawing mode. In impress.js, the coordinates are so complex that if you draw on the screen and then zoom/rotate to the next slide, the drawings usually don't align or get lost in 3D space.
+ * **Printing/PDF:** b6plus uses standard CSS @media print. You just hit Ctrl+P and it prints one slide per page perfectly. impress.js usually requires a headless Chrome instance and a complex script just to get a decent PDF.
+ * **Simple Layouts:** b6plus doesn't require you to manage X, Y, and Z coordinates. If you add a paragraph, the slide just grows. In hovercraft/impress.js, if your text is too long, it overflows the "camera view," and you have to manually adjust the scale.
+### 3. Implementation Tip for b6plus
+When you write your writer for prezentprogramo, you just need to map the Slide node (from the code above) to a <section class="slide"> tag.
+**In your Writer's visit_Slide method:**
+```python
+def visit_Slide(self, node):
+    self.body.append('<section class="slide">')
+
+def depart_Slide(self, node):
+    self.body.append('</section>')
+
+```
+This will produce the exact HTML structure b6plus needs. No more fighting with hovercraft’s layout engine! Since you are already using Firefox extensions for marking, you'll find the native b6plus features even more integrated for your YouTube recordings.
+
+Problems of bs6+
+````````````````
+
+But there are some problems in B6+ :
+1. It uses old form of JavaScript code writing and it doesn't use newer JavaScript way of writing a JavaScript code. Bs6+ is less modular.
+
+2. There are less documentation and usage of it in other projects. Therefore using it may not as easy. Even you didn't know about bs6+ in the first encounter of name and you had to ask me to be more specific.
+
+3. It doesn't have some necessary features like right mouse click to go to the previous slide. It doesn't use wheel mouse for changing slides. The bs6+ way of coding is much harder to extend or change it. It is mostly only one man creation.
+
+What do you think about above problems?
+Do you have good solutions for them or at least some suggestions?
+
+
+
+You’ve hit on the classic "Academic Tool Dilemma." **b6plus** is brilliant because it is designed by a father of the Web (Bert Bos) to be incredibly lean, but it suffers from being a "frozen in time" project. It is more of a finished work of art than a living framework.
+Here is a breakdown of how to address those specific technical hurdles if you decide to stick with it for your prezentprogramo tool.
+### 1. The "Old" JavaScript & Lack of Modularity
+The code is likely written in the "Global Namespace" style of the early 2000s (pre-ES6).
+ * **The Suggestion:** Don't try to refactor his code. Instead, **wrap it**. Since you are building a generator, you can treat b6.js as a "black box" vendor script.
+ * **Modernizing it:** If you need to add modular features, you can load b6.js and then write a modern **ES6 Module** wrapper around it that interacts with the DOM events it fires. You keep the "engine" old but build your "dashboard" with modern JS.
+### 2. Lack of Documentation & Community
+Because only a handful of people at W3C use it, you won't find help on StackOverflow.
+ * **The Solution:** Since you are a programmer building a tool for your own courses, you become the documentation. The "source of truth" for b6plus is the **source code itself**—which, fortunately, is very small.
+ * **The Silver Lining:** Unlike impress.js or Reveal.js, which have thousands of lines of code, b6plus is small enough that you can read the entire thing in an afternoon. This gives you *more* control, not less.
+### 3. Missing Features (Mouse Wheel & Right Click)
+This is actually the easiest problem to solve! Because b6plus relies on simple HTML anchors or CSS classes to change slides, you can "inject" these features using a small, modern helper script in your generator.
+**Solution: The "Bridge" Script**
+In your prezentprogramo output, you can include a tiny 20-line script that adds these UX features without touching Bert Bos’s original code:
+```javascript
+// A modern helper to fix b6plus UX issues
+window.addEventListener('wheel', (e) => {
+    if (e.deltaY > 0) {
+        // Trigger b6plus "Next" (usually a click or key event)
+        document.dispatchEvent(new KeyboardEvent('keydown', {'key': 'PageDown'}));
+    } else {
+        document.dispatchEvent(new KeyboardEvent('keydown', {'key': 'PageUp'}));
+    }
+});
+
+window.addEventListener('contextmenu', (e) => {
+    e.preventDefault(); // Stop the menu from appearing
+    // Trigger b6plus "Previous"
+    document.dispatchEvent(new KeyboardEvent('keydown', {'key': 'PageUp'}));
+});
+
+```
+### The Verdict: Should you use it?
+If your priority is **minimalism and the Marker Tool**, b6plus is still a strong candidate despite its "one-man project" status. However, if the "Old JS" bothers you, I recommend looking at **Shower.js**.
+**An Alternative: Shower.js**
+ * **Similarities:** It is also "HTML-first" and very lightweight.
+ * **Advantages:** It is modern, modular (uses Vanilla JS/ES6), and well-documented.
+ * **Caveat:** It doesn't have the "Marker" tool built-in, but because it is modular, adding a marker library (like markerjs) to it would be very easy.
+**My Peer Suggestion:** If you love the **drawing features** of b6plus, use it but add a "UX Fixer" script like the one I wrote above. It keeps your tool simple, reduces Python dependencies, and gives your students a very fast, printable slide deck. Don't worry about it being a "one-man creation"—in the world of open source, sometimes a small, finished tool is more reliable than a massive, constantly changing framework!
+
+Wrap modernized javascript around old js code
+`````````````````````````````````````````````
+
+Thanks, 
+
+1. I didn't fully understand the "Modernizing it". Do you have any small projects that use this method? Or you can make simple example to show how it works?
+
+2. I checked shower.js too but it has some problems too. First and for most it cannot be run without a web server. It is not possible that open an slide in a browser and it works. Making offline html file to put in a simple server like GitHub and a like is one the benefits of hovercraft. I do use it to put my slides easily on the web. For example https://yoosofan.github.io/slide/os/yic/#/step-2
+
+3. You are totally right about my not good spoken way of one man creation. I really didn't mean that. I just wanted to describe the situation but I didn't use the right words to say it.
+
+
+Answer
+~~~~~~
+
+
+I completely understand—when a project is a "one-man creation," it usually means it’s a specific vision that might not follow common community standards, making it harder to customize. It’s a very practical observation!
+Let’s address your points on modernization and the "Offline/File" requirement.
+### 1. Modernizing "Old" Code (The Wrapper Method)
+By "Modernizing it," I mean treating the old b6plus.js like an engine inside a car. You don't take the engine apart; you just build a new, modern dashboard (your ES6 code) that talks to it.
+**The Concept:** Old JS often communicates via **Global Events** (like key presses) or by changing the **URL Hash** (like #/step-2). Your modern script just sends those signals.
+**Simple Example:**
+Suppose b6plus.js listens for the "Right Arrow" key to change slides. You want to add a "Mouse Wheel" feature using modern ES6 modules.
+```javascript
+// your-modern-extension.js (ES6 Module)
+export const initModernControls = () => {
+    window.addEventListener('wheel', (event) => {
+        // We detect the wheel move...
+        const direction = event.deltaY > 0 ? 'ArrowRight' : 'ArrowLeft';
+        
+        // ...and we "fake" a keypress that the old b6plus code understands
+        const fakeKey = new KeyboardEvent('keydown', { key: direction });
+        document.dispatchEvent(fakeKey);
+        
+        console.log(`Modern JS told the Old JS to go: ${direction}`);
+    });
+};
+
+```
+You would include it in your HTML like this:
+```html
+<script src="b6plus.js"></script>
+
+<script type="module">
+    import { initModernControls } from './your-modern-extension.js';
+    initModernControls();
+</script>
+
+```
+### 2. The "Offline / File://" Requirement
+You are 100% correct about **Shower.js**. Many modern frameworks (like Slidev or Reveal.js) rely on "Asynchronous Module Definition" (AMD) or fetching external assets, which triggers **CORS security errors** when you open a file directly from your hard drive (file:///C:/...).
+**Why b6plus (and hovercraft) win here:**
+They are designed to be "Self-Contained." Because b6plus is just one file and doesn't try to "fetch" other pieces of itself, the browser's security doesn't block it.
+If you want to host on GitHub Pages or run from a USB stick without a local server, b6plus is technically superior for that specific use case.
+### 3. Suggestions for PrezentProgramo
+Since you need **offline capability**, **minimal dependencies**, and **easy printing**, here is my suggestion for your directive-based implementation:
+**The Slide Directive (.. slide::)**
+Instead of using the four dashes ----, use the directive I mentioned earlier. It makes your RST look much more like professional code:
+```rst
+.. slide::
+   :id: introduction
+   :class: title-slide
+
+   Operating Systems
+   =================
+   Week 5: Memory Management
+
+```
+**The Generator Strategy:**
+ 1. **Extract the CSS/JS:** Copy the b6plus.js and the basic CSS file into your Python package assets.
+ 2. **The Writer:** Have your Python script wrap each .. slide:: block in a <section class="slide">.
+ 3. **The "Fixer" Script:** Include a small snippet of JavaScript (using the "Modernization" method above) to add the mouse wheel and right-click functionality you missed.
+This way, you get the **best of both worlds**:
+ * The **stability and drawing tools** of Bert Bos’s b6plus.
+ * The **modern UX** (wheel/right-click) that you want.
+ * The **zero-server** requirement so your students can just download a single .html file.
+**A relevant follow-up question:**
+In your YouTube videos, do you find it more helpful to draw "live" on top of existing text, or do you prefer having a dedicated "blank space" on the slide for sketching?
+
+
+Pro model limit
+```````````````
+Fri Apr 24 08:14:28 +04 2026
+
+
 date based
 ----------
 2026/04/01
@@ -426,3 +834,5 @@ date based
     * https://makefiletutorial.com/
     * https://earthly.dev/blog/python-makefile/
     * https://www.kdnuggets.com/the-case-for-makefiles-in-python-projects-and-how-to-get-started
+
+
