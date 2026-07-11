@@ -149,14 +149,34 @@ def __get_pdf_from_html(
     driver.set_window_size(print_options["window_width"], print_options["window_height"])
 
     # Detect the type of source and create data url if needed
-    if type(source) == io.BytesIO:
+    if isinstance(source, io.BytesIO):
         encoded_content = base64.b64encode(source.getvalue()).decode('utf-8')
         path = f'data:text/html;base64,{encoded_content}'
-    if not source.startswith('http') and not source.startswith('file'):
-        encoded_content = base64.b64encode(source.encode('utf-8')).decode('utf-8')
-        path = f'data:text/html;base64,{encoded_content}'
-    else:
+    elif source.startswith(('http://', 'https://')):
         path = source
+    else:
+        # Dynamically handle local files or raw HTML strings
+        import os
+        import urllib.parse
+        from pathlib import Path
+
+        # Clean up file:// prefix if present
+        file_path = source
+        if file_path.startswith('file://'):
+            file_path = urllib.parse.urlparse(source).path
+        
+        # Resolve to absolute path to verify existence
+        target_path = Path(file_path).resolve()
+        
+        if target_path.exists() and target_path.is_file():
+            # Safely read local file and encode it to bypass OS/Chrome sandbox blocks
+            with open(target_path, 'rb') as f:
+                encoded_content = base64.b64encode(f.read()).decode('utf-8')
+            path = f'data:text/html;base64,{encoded_content}'
+        else:
+            # Fallback if the source is a raw HTML string instead of a file path
+            encoded_content = base64.b64encode(source.encode('utf-8')).decode('utf-8')
+            path = f'data:text/html;base64,{encoded_content}'
 
     driver.get(path)
 
