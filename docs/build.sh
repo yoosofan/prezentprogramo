@@ -1,6 +1,6 @@
 #!/bin/bash
 function commot_tasks1(){
-    rsync -av --delete ~/research/projects/prezentprogramo/ ~/temp/prezent/
+    rsync -av --delete ~/research/projects/other/prezentprogramo/ ~/temp/prezent/
 
     #uv tool uninstall --all
     #uv cache clean
@@ -27,7 +27,7 @@ function bildumilo_test_run(){
 }
 
 run22
-# source /home/ahmad/install/uv.virtual.environments/p3.14.3/bin/activate
+# source ~/install/uv.virtual.environments/p3.14.3/bin/activate
 #bildumilo_test_run
 
 : <<'COMMENT11'
