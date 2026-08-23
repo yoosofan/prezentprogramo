@@ -1,3 +1,12 @@
+**Successor Project**
+
+`prezento <https://github.com/yoosofan/prezento>`_ is the official successor of this project.
+Development focus has moved to **prezento**, which offers full compatibility with the latest
+versions of ``docutils``, additional directives, a simpler and more maintainable design,
+and an experimental `Language Server (LSP) <https://github.com/yoosofan/prezento/blob/main/tools/slido_ls.py>`_
+for better editor support. As a result, **prezentprogramo** will receive only limited maintenance
+going forward.
+
 Prezentprogramo
 ===============
 Prezentprogramo is a tool to make `impress.js <https://github.com/impress/impress.js>`_ presentations from
